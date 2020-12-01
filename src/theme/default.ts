@@ -1,5 +1,6 @@
 export default {
   colors: {
+    blueViolet: ['#4596EA', '#7145CB'],
     primary: '#157EFB',
     danger: '#FC595B',
 

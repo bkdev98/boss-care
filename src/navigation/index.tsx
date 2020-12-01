@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {RootState} from '@reducers';
 import LoginScreen from '@screens/Authentication/Login';
+import SplashScreen from '@screens/Splash';
 import HomeScreen from '@screens/Home';
 import SettingScreen from 'screens/Setting';
 import MovieDetailScreen from '@screens/MovieDetail';
@@ -12,6 +13,7 @@ import MovieDetailScreen from '@screens/MovieDetail';
 import {navigationRef} from './service';
 
 export const SCREENS = {
+  SPLASH: 'Splash',
   AUTH: {
     LOGIN: 'Login',
   },
@@ -30,6 +32,7 @@ const AppNavigation = () => {
       <Stack.Navigator headerMode="none">
         {!isAuth ? (
           <>
+            <Stack.Screen name={SCREENS.SPLASH} component={SplashScreen} />
             <Stack.Screen name={SCREENS.AUTH.LOGIN} component={LoginScreen} />
           </>
         ) : (
