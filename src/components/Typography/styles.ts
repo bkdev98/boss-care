@@ -5,10 +5,60 @@ import getScalableSize from '@utils/getScalableSize';
 
 export default StyleSheet.create({
   default: {
-    color: theme.colors.text_paragraph,
+    color: theme.colors.black,
+    fontFamily: theme.fonts.regular,
+  },
+  h1: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.bold,
+    fontSize: getScalableSize.f(34),
+  },
+  h2: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.bold,
+    fontSize: getScalableSize.f(24),
+  },
+  h3: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.bold,
+    fontSize: getScalableSize.f(18),
+  },
+  h4: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.bold,
+    fontSize: getScalableSize.f(16),
+  },
+  h5: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.bold,
+    fontSize: getScalableSize.f(14),
+  },
+  body1: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.regular,
+    fontSize: getScalableSize.f(16),
+    lineHeight: getScalableSize.h(24),
+    letterSpacing: 1,
+  },
+  body2: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.regular,
+    fontSize: getScalableSize.f(12),
+    lineHeight: getScalableSize.h(18),
+    letterSpacing: 2,
+  },
+  body3: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.regular,
+    fontSize: getScalableSize.f(14),
+  },
+  button: {
+    fontFamily: theme.fonts.bold,
+    fontSize: getScalableSize.f(16),
+    textAlign: 'center',
   },
   paragraph: {
-    color: theme.colors.text_paragraph,
+    color: theme.colors.black,
     fontWeight: '700',
     fontSize: getScalableSize.f(14),
     letterSpacing: 0.2,

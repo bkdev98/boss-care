@@ -1,11 +1,19 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import SplashView from './Splash.view';
 
 import {SCREENS} from '@navigation';
+import {RootState} from '@reducers';
 
 const SplashContainer = ({navigation}: {navigation: any}) => {
+  const onboardingFinished = useSelector((state: RootState) => state.app.onboardingFinished);
+
   function handleFinish() {
-    navigation.navigate(SCREENS.AUTH.LOGIN);
+    if (!onboardingFinished) {
+      navigation.replace(SCREENS.ONBOARDING);
+    } else {
+      navigation.replace(SCREENS.AUTH.LOGIN);
+    }
   }
 
   return <SplashView onFinish={handleFinish} />;

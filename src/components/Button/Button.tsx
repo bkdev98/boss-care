@@ -8,6 +8,7 @@ import styles from './styles';
 interface ButtonProps extends PressableProps {
   label: string;
   variant?: 'default' | 'primary' | 'ghost' | 'secondary';
+  size?: 'large' | 'small';
   disabled?: boolean;
   icon?: JSX.Element;
   labelStyle?: TextStyle;
@@ -16,6 +17,7 @@ interface ButtonProps extends PressableProps {
 const Button: React.FC<ButtonProps> = ({
   label,
   variant = 'default',
+  size = 'large',
   style,
   disabled,
   icon,
@@ -29,11 +31,14 @@ const Button: React.FC<ButtonProps> = ({
       style={({pressed}) => [
         styles.button,
         styles[variant],
+        styles[size],
         pressed && (styles as any)[`${variant}Pressed`],
         disabled && styles.disabled,
         style,
       ]}>
-      <Typography variant="buttonLabel" style={[(styles as any)[`${variant}Label`], labelStyle]}>
+      <Typography
+        variant="button"
+        style={[(styles as any)[`${variant}Label`], (styles as any)[`${size}Label`], labelStyle]}>
         {label}
       </Typography>
       {icon}

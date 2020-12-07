@@ -9,7 +9,7 @@ import styles from './styles';
 import {PawIcon} from '@components/Icon';
 import getScalableSize from '@utils/getScalableSize';
 
-interface SettingViewProps {
+interface SplashViewProps {
   onFinish?: any;
 }
 
@@ -52,9 +52,9 @@ const PAWS = [
   },
 ];
 
-const STEP_DURATION = 500;
+const STEP_DURATION = 400;
 
-const SettingView: React.FC<SettingViewProps> = ({onFinish}) => {
+const SplashView: React.FC<SplashViewProps> = ({onFinish}) => {
   const ANIMATED_PAWS = PAWS.map((item) => ({...item, animatedValue: new Animated.Value(0)}));
 
   useEffect(() => {
@@ -100,4 +100,4 @@ const SettingView: React.FC<SettingViewProps> = ({onFinish}) => {
   );
 };
 
-export default SettingView;
+export default SplashView;

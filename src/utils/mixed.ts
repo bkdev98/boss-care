@@ -1,3 +1,5 @@
+import {useRef, useEffect} from 'react';
+
 export function getImageUri({
   path,
   size = 'medium',
@@ -13,3 +15,11 @@ export function getImageUri({
   }
   return `https://image.tmdb.org/t/p/w500/${path}`;
 }
+
+export const usePrevious = <T>(value: T): T | undefined => {
+  const ref = useRef<T>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};

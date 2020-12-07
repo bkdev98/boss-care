@@ -5,6 +5,15 @@ import styles from './styles';
 
 interface TypographyProps extends TextProps {
   variant?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'button'
+    | 'body1'
+    | 'body2'
+    | 'body3'
     | 'header'
     | 'title'
     | 'subTitle'
