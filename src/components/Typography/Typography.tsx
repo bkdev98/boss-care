@@ -1,9 +1,11 @@
 import React from 'react';
-import {Text, TextProps} from 'react-native';
+import {Text, TextProps, Animated, TextStyle} from 'react-native';
 
 import styles from './styles';
 
 interface TypographyProps extends TextProps {
+  style?: TextStyle | any;
+  animated?: boolean;
   variant?:
     | 'h1'
     | 'h2'
@@ -23,7 +25,15 @@ interface TypographyProps extends TextProps {
     | 'inputLabel';
 }
 
-const Typography: React.FC<TypographyProps> = ({variant = 'paragraph', style, ...props}) => {
+const Typography: React.FC<TypographyProps> = ({
+  variant = 'paragraph',
+  style,
+  animated,
+  ...props
+}) => {
+  if (animated) {
+    return <Animated.Text style={[styles.default, styles[variant], style]} {...props} />;
+  }
   return <Text style={[styles.default, styles[variant], style]} {...props} />;
 };
 

@@ -10,7 +10,7 @@ const OnboardingContainer = ({navigation}: {navigation: any}) => {
 
   function handleFinish() {
     dispatch(finishOnboarding());
-    navigation.replace(SCREENS.AUTH.LOGIN);
+    navigation.replace(SCREENS.AUTH.REGISTRATION_SOCIAL);
   }
 
   return <OnboardingView onFinish={handleFinish} onLogin={handleFinish} />;

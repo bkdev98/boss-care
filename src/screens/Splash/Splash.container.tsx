@@ -12,7 +12,7 @@ const SplashContainer = ({navigation}: {navigation: any}) => {
     if (!onboardingFinished) {
       navigation.replace(SCREENS.ONBOARDING);
     } else {
-      navigation.replace(SCREENS.AUTH.LOGIN);
+      navigation.replace(SCREENS.AUTH.REGISTRATION_SOCIAL);
     }
   }
 

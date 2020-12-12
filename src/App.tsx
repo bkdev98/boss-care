@@ -7,7 +7,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import AppNavigation from '@navigation';
 import store, {persistor} from './store';
 
-LogBox.ignoreLogs(['React.createFactory()', 'Require cycle:']);
+LogBox.ignoreLogs(['React.createFactory()', 'Require cycle:', 'Sending `onAnimated']);
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {

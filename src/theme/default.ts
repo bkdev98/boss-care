@@ -11,6 +11,8 @@ export default {
     darkBlue: '#2E1E7A',
     black: '#000000',
     yellow: '#FFCF6F',
+    gray: '#BBC3CE',
+    palegray: '#F9FAFB',
 
     text_title: '#404040',
     text_subTitle: '#B3B3B3',
@@ -38,6 +40,12 @@ export default {
       shadowOpacity: 0.03,
       shadowOffset: {width: 3, height: 3},
       shadowRadius: 5,
+    },
+    plahaShadow: {
+      shadowColor: '#2D368A',
+      shadowOpacity: 0.08,
+      shadowOffset: {width: 4, height: 6},
+      shadowRadius: 28,
     },
   },
   fonts: {

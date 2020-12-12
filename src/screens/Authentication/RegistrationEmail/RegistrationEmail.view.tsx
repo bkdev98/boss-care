@@ -8,27 +8,28 @@ import theme from '@theme';
 import Layout from '@components/Layout';
 import Typography from '@components/Typography';
 import Button from '@components/Button';
+import CheckBox from '@components/CheckBox';
 import IconButton from '@components/IconButton';
 import ArrowLeftIcon from '@components/Icon/ArrowLeft';
 import FacebookLiteIcon from '@components/Icon/FacebookLite';
 import GoogleLiteIcon from '@components/Icon/GoogleLite';
 
 import {FormikForm, FormikTextInput} from '@components/Formik';
-import {loginValidationSchema} from '@utils/validationSchema';
-import {ISignInCredential} from '@entities/credential';
+import {registerValidationSchema} from '@utils/validationSchema';
+import {IRegisterCredential} from '@entities/credential';
 
 import styles from './styles';
 
-interface LoginViewProps {
+interface RegistrationEmailViewProps {
   loading: boolean;
   onGoBack: () => void;
   onContinueFacebook: () => void;
   onContinueGoogle: () => void;
-  onSignIn: (values: ISignInCredential) => void;
-  onRegister: () => void;
+  onSignIn: () => void;
+  onRegister: (values: IRegisterCredential) => void;
 }
 
-const LoginView: React.FC<LoginViewProps> = ({
+const RegistrationEmailView: React.FC<RegistrationEmailViewProps> = ({
   onGoBack,
   onSignIn,
   onRegister,
@@ -55,17 +56,26 @@ const LoginView: React.FC<LoginViewProps> = ({
         </View>
         <ScrollView keyboardShouldPersistTaps="handled">
           <Typography variant="h1" style={styles.title}>
-            Sign In
+            Registration
           </Typography>
           <Formik
             initialValues={{
+              fullName: '',
               email: '',
               password: '',
+              acceptRules: false,
+              receiveNewsletter: false,
             }}
-            validationSchema={loginValidationSchema}
-            onSubmit={onSignIn}>
+            validationSchema={registerValidationSchema}
+            onSubmit={onRegister}>
             {(formikProps) => (
               <FormikForm style={styles.formWrapper}>
+                <FormikTextInput
+                  name="fullName"
+                  label="Full name"
+                  wrapperStyle={styles.formInput}
+                  autoCapitalize="words"
+                />
                 <FormikTextInput
                   name="email"
                   label="Email"
@@ -79,13 +89,46 @@ const LoginView: React.FC<LoginViewProps> = ({
                   wrapperStyle={styles.formInput}
                   secureTextEntry
                 />
-                <TouchableOpacity activeOpacity={0.7}>
-                  <Typography variant="body3" style={styles.forgotPassword}>
-                    Do not remember the password?
-                  </Typography>
-                </TouchableOpacity>
+                <View style={styles.formCheckBoxWrapper}>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() =>
+                      formikProps.setFieldValue('acceptRules', !formikProps.values.acceptRules)
+                    }
+                    style={styles.formCheckBox}>
+                    <CheckBox
+                      value={formikProps.values.acceptRules}
+                      onValueChange={() =>
+                        formikProps.setFieldValue('acceptRules', !formikProps.values.acceptRules)
+                      }
+                      style={styles.checkBox}
+                    />
+                    <Typography variant="body3">I agree with the rules</Typography>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() =>
+                      formikProps.setFieldValue(
+                        'receiveNewsletter',
+                        !formikProps.values.receiveNewsletter,
+                      )
+                    }
+                    style={styles.formCheckBox}>
+                    <CheckBox
+                      value={formikProps.values.receiveNewsletter}
+                      onValueChange={() =>
+                        formikProps.setFieldValue(
+                          'receiveNewsletter',
+                          !formikProps.values.receiveNewsletter,
+                        )
+                      }
+                      style={styles.checkBox}
+                    />
+                    <Typography variant="body3">I do not want to receive newsletter</Typography>
+                  </TouchableOpacity>
+                </View>
                 <Button
-                  label="Sign In"
+                  label="Sign Up"
                   variant="primary"
                   disabled={loading}
                   onPress={formikProps.handleSubmit}
@@ -111,9 +154,9 @@ const LoginView: React.FC<LoginViewProps> = ({
               </IconButton>
             </View>
           </View>
-          <TouchableOpacity activeOpacity={0.7} onPress={onRegister}>
+          <TouchableOpacity activeOpacity={0.7} onPress={onSignIn}>
             <Typography variant="body1" style={styles.haveAccountTxt}>
-              Don't have account yet? <Text style={styles.signInTxt}>Registration</Text>
+              Already have an account? <Text style={styles.signInTxt}>Sign In</Text>
             </Typography>
           </TouchableOpacity>
         </ScrollView>
@@ -122,4 +165,4 @@ const LoginView: React.FC<LoginViewProps> = ({
   );
 };
 
-export default LoginView;
+export default RegistrationEmailView;

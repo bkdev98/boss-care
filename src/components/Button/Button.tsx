@@ -1,16 +1,17 @@
 import React from 'react';
-import {Pressable, PressableProps, TextStyle} from 'react-native';
+import {Pressable, PressableProps, TextStyle, View} from 'react-native';
 
 import Typography from '@components/Typography';
 
 import styles from './styles';
 
 interface ButtonProps extends PressableProps {
-  label: string;
-  variant?: 'default' | 'primary' | 'ghost' | 'secondary';
+  label: string | JSX.Element;
+  variant?: 'default' | 'primary' | 'ghost' | 'secondary' | 'white' | 'ghostOutline' | 'ghostWhite';
   size?: 'large' | 'small';
   disabled?: boolean;
-  icon?: JSX.Element;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
   labelStyle?: TextStyle;
 }
 
@@ -20,10 +21,19 @@ const Button: React.FC<ButtonProps> = ({
   size = 'large',
   style,
   disabled,
-  icon,
+  leftIcon,
+  rightIcon,
   labelStyle,
   ...props
 }) => {
+  function renderLeftIcon() {
+    return leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>;
+  }
+
+  function renderRightIcon() {
+    return rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>;
+  }
+
   return (
     <Pressable
       {...props}
@@ -36,12 +46,13 @@ const Button: React.FC<ButtonProps> = ({
         disabled && styles.disabled,
         style,
       ]}>
+      {renderLeftIcon()}
       <Typography
         variant="button"
         style={[(styles as any)[`${variant}Label`], (styles as any)[`${size}Label`], labelStyle]}>
         {label}
       </Typography>
-      {icon}
+      {renderRightIcon()}
     </Pressable>
   );
 };

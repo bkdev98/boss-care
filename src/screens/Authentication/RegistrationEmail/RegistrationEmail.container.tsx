@@ -2,14 +2,14 @@ import React from 'react';
 // import {Linking} from 'react-native';
 import {/**useDispatch, */ useSelector} from 'react-redux';
 
-import {ISignInCredential} from '@entities/credential';
+import {IRegisterCredential} from '@entities/credential';
 // import {login} from '@actions';
 import {RootState} from '@reducers';
 import {SCREENS} from '@navigation';
 
-import LoginView from './Login.view';
+import RegistrationEmailView from './RegistrationEmail.view';
 
-const LoginContainer = ({navigation}: {navigation: any}) => {
+const RegistrationEmailContainer = ({navigation}: {navigation: any}) => {
   // const dispatch = useDispatch();
   const {beingAuth} = useSelector((state: RootState) => state.auth);
 
@@ -17,12 +17,12 @@ const LoginContainer = ({navigation}: {navigation: any}) => {
     navigation.goBack();
   }
 
-  function handleRegister() {
-    navigation.replace(SCREENS.AUTH.REGISTRATION_EMAIL);
+  function handleSignIn() {
+    navigation.replace(SCREENS.AUTH.LOGIN);
   }
 
-  function handleLogin(values: ISignInCredential) {
-    console.log('login', values);
+  function handleRegister(values: IRegisterCredential) {
+    console.log('register', values);
   }
 
   function handleContinueFacebook() {}
@@ -30,15 +30,15 @@ const LoginContainer = ({navigation}: {navigation: any}) => {
   function handleContinueGoogle() {}
 
   return (
-    <LoginView
-      onSignIn={handleLogin}
+    <RegistrationEmailView
+      onRegister={handleRegister}
       loading={beingAuth}
       onGoBack={handleGoBack}
-      onRegister={handleRegister}
+      onSignIn={handleSignIn}
       onContinueFacebook={handleContinueFacebook}
       onContinueGoogle={handleContinueGoogle}
     />
   );
 };
 
-export default LoginContainer;
+export default RegistrationEmailContainer;

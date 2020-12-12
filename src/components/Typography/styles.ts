@@ -38,14 +38,14 @@ export default StyleSheet.create({
     fontFamily: theme.fonts.regular,
     fontSize: getScalableSize.f(16),
     lineHeight: getScalableSize.h(24),
-    letterSpacing: 1,
+    letterSpacing: 0.2,
   },
   body2: {
     color: theme.colors.black,
     fontFamily: theme.fonts.regular,
     fontSize: getScalableSize.f(12),
     lineHeight: getScalableSize.h(18),
-    letterSpacing: 2,
+    letterSpacing: 0.2,
   },
   body3: {
     color: theme.colors.black,
@@ -59,7 +59,6 @@ export default StyleSheet.create({
   },
   paragraph: {
     color: theme.colors.black,
-    fontWeight: '700',
     fontSize: getScalableSize.f(14),
     letterSpacing: 0.2,
   },
@@ -90,9 +89,10 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   inputLabel: {
-    fontSize: getScalableSize.f(12),
-    fontWeight: '500',
+    fontSize: getScalableSize.f(16),
+    lineHeight: getScalableSize.h(20),
+    fontFamily: theme.fonts.semiBold,
     letterSpacing: 0.2,
-    color: theme.colors.text_caption,
+    color: theme.colors.gray,
   },
 });

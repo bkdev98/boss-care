@@ -34,9 +34,22 @@ export default StyleSheet.create({
     marginBottom: getScalableSize.h(5),
   },
   formBtn: {},
+  formCheckBoxWrapper: {
+    marginTop: getScalableSize.h(23),
+    marginBottom: getScalableSize.h(8),
+  },
+  formCheckBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: getScalableSize.h(16),
+  },
+  checkBox: {
+    marginLeft: getScalableSize.w(9),
+    marginRight: getScalableSize.w(14),
+  },
   footerWrapper: {
-    marginTop: getScalableSize.h(50),
-    marginBottom: getScalableSize.h(80),
+    marginTop: getScalableSize.h(22),
+    marginBottom: getScalableSize.h(32),
   },
   orWrapper: {
     marginHorizontal: getScalableSize.w(20),
@@ -72,12 +85,6 @@ export default StyleSheet.create({
   },
   signInTxt: {
     fontFamily: theme.fonts.semiBold,
-    color: theme.colors.violet,
-  },
-  forgotPassword: {
-    marginBottom: getScalableSize.h(24),
-    alignSelf: 'flex-end',
-    textAlign: 'right',
     color: theme.colors.violet,
   },
 });

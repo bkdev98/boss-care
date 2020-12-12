@@ -25,15 +25,32 @@ export default StyleSheet.create({
   primary: {
     backgroundColor: theme.colors.violet,
   },
+  white: {
+    backgroundColor: theme.colors.white,
+  },
   ghost: {},
+  ghostWhite: {},
+  ghostOutline: {
+    borderWidth: 1,
+    borderColor: theme.colors.white,
+  },
   defaultPressed: {
     backgroundColor: theme.colors.background_neutral_2,
   },
   primaryPressed: {
     backgroundColor: theme.colors.darkBlue,
   },
+  whitePressed: {
+    backgroundColor: theme.colors.background_neutral_2,
+  },
+  ghostWhitePressed: {
+    opacity: 0.8,
+  },
   ghostPressed: {
     backgroundColor: theme.colors.background_neutral_1,
+  },
+  ghostOutlinePressed: {
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
   },
   disabled: {opacity: 0.3},
   secondary: {
@@ -51,8 +68,23 @@ export default StyleSheet.create({
   ghostLabel: {
     color: theme.colors.violet,
   },
+  ghostOutlineLabel: {
+    color: theme.colors.white,
+  },
+  ghostWhiteLabel: {
+    color: theme.colors.white,
+  },
+  whiteLabel: {
+    color: theme.colors.violet,
+  },
   smallLabel: {
     fontSize: getScalableSize.f(13),
     fontFamily: theme.fonts.semiBold,
+  },
+  leftIcon: {
+    marginRight: getScalableSize.w(16),
+  },
+  rightIcon: {
+    marginLeft: getScalableSize.w(16),
   },
 });

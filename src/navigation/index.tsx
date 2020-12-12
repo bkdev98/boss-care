@@ -4,9 +4,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {RootState} from '@reducers';
-import LoginScreen from '@screens/Authentication/Login';
 import SplashScreen from '@screens/Splash';
 import OnboardingScreen from '@screens/Onboarding';
+import RegistrationSocialScreen from '@screens/Authentication/RegistrationSocial';
+import RegistrationEmailScreen from '@screens/Authentication/RegistrationEmail';
+import LoginScreen from '@screens/Authentication/Login';
 import HomeScreen from '@screens/Home';
 import SettingScreen from 'screens/Setting';
 import MovieDetailScreen from '@screens/MovieDetail';
@@ -17,6 +19,8 @@ export const SCREENS = {
   SPLASH: 'Splash',
   ONBOARDING: 'Onboarding',
   AUTH: {
+    REGISTRATION_SOCIAL: 'RegistrationSocial',
+    REGISTRATION_EMAIL: 'RegistrationEmail',
     LOGIN: 'Login',
   },
   HOME: 'Home',
@@ -36,6 +40,14 @@ const AppNavigation = () => {
           <>
             <Stack.Screen name={SCREENS.SPLASH} component={SplashScreen} />
             <Stack.Screen name={SCREENS.ONBOARDING} component={OnboardingScreen} />
+            <Stack.Screen
+              name={SCREENS.AUTH.REGISTRATION_SOCIAL}
+              component={RegistrationSocialScreen}
+            />
+            <Stack.Screen
+              name={SCREENS.AUTH.REGISTRATION_EMAIL}
+              component={RegistrationEmailScreen}
+            />
             <Stack.Screen name={SCREENS.AUTH.LOGIN} component={LoginScreen} />
           </>
         ) : (
