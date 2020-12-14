@@ -2,16 +2,23 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {RootState} from '@reducers';
+import theme from '@theme';
+import getScalableSize from '@utils/getScalableSize';
+
 import SplashScreen from '@screens/Splash';
 import OnboardingScreen from '@screens/Onboarding';
 import RegistrationSocialScreen from '@screens/Authentication/RegistrationSocial';
 import RegistrationEmailScreen from '@screens/Authentication/RegistrationEmail';
 import LoginScreen from '@screens/Authentication/Login';
-import HomeScreen from '@screens/Home';
-import SettingScreen from 'screens/Setting';
-import MovieDetailScreen from '@screens/MovieDetail';
+import SearchMainScreen from '@screens/SearchMain';
+
+import TabSearchIcon from '@components/Icon/TabSearch';
+import TabAppointmentsIcon from '@components/Icon/TabAppointments';
+import TabExploreIcon from '@components/Icon/TabExplore';
+import TabProfileIcon from '@components/Icon/TabProfile';
 
 import {navigationRef} from './service';
 
@@ -23,9 +30,49 @@ export const SCREENS = {
     REGISTRATION_EMAIL: 'RegistrationEmail',
     LOGIN: 'Login',
   },
-  HOME: 'Home',
-  MOVIE_DETAIL: 'MovieDetail',
-  SETTING: 'Setting',
+  APP_TAB: 'AppTab',
+  SEARCH_MAIN: 'Search',
+  APPOINTMENTS: 'Appointments',
+  EXPLORE: 'Explore',
+  PROFILE: 'Profile',
+};
+
+const Tab = createBottomTabNavigator();
+
+const AppTab = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused}) => {
+          switch (route.name) {
+            case SCREENS.SEARCH_MAIN:
+              return <TabSearchIcon focused={focused} />;
+            case SCREENS.APPOINTMENTS:
+              return <TabAppointmentsIcon focused={focused} />;
+            case SCREENS.EXPLORE:
+              return <TabExploreIcon focused={focused} />;
+            case SCREENS.PROFILE:
+              return <TabProfileIcon focused={focused} />;
+            default:
+              return null;
+          }
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: theme.colors.violet,
+        inactiveTintColor: '#BBC3CE',
+        labelStyle: {
+          fontFamily: theme.fonts.medium,
+          fontSize: getScalableSize.f(10),
+          letterSpacing: 0.4,
+        },
+      }}>
+      <Tab.Screen name={SCREENS.SEARCH_MAIN} component={SearchMainScreen} />
+      <Tab.Screen name={SCREENS.APPOINTMENTS} component={SearchMainScreen} />
+      <Tab.Screen name={SCREENS.EXPLORE} component={SearchMainScreen} />
+      <Tab.Screen name={SCREENS.PROFILE} component={SearchMainScreen} />
+    </Tab.Navigator>
+  );
 };
 
 const Stack = createStackNavigator();
@@ -52,13 +99,7 @@ const AppNavigation = () => {
           </>
         ) : (
           <>
-            <Stack.Screen name={SCREENS.HOME} component={HomeScreen} />
-            <Stack.Screen name={SCREENS.SETTING} component={SettingScreen} />
-            <Stack.Screen
-              name={SCREENS.MOVIE_DETAIL}
-              component={MovieDetailScreen}
-              initialParams={{movie: null}}
-            />
+            <Stack.Screen name={SCREENS.APP_TAB} component={AppTab} />
           </>
         )}
       </Stack.Navigator>

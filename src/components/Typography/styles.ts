@@ -11,7 +11,7 @@ export default StyleSheet.create({
   h1: {
     color: theme.colors.black,
     fontFamily: theme.fonts.bold,
-    fontSize: getScalableSize.f(34),
+    fontSize: getScalableSize.f(32),
   },
   h2: {
     color: theme.colors.black,
@@ -76,10 +76,10 @@ export default StyleSheet.create({
     letterSpacing: 0.2,
   },
   caption: {
-    fontSize: getScalableSize.f(12),
-    fontWeight: '600',
-    letterSpacing: 0.2,
-    color: theme.colors.text_caption,
+    fontSize: getScalableSize.f(11),
+    fontFamily: theme.fonts.regular,
+    letterSpacing: 0.4,
+    color: theme.colors.black,
   },
   buttonLabel: {
     color: theme.colors.text_paragraph,

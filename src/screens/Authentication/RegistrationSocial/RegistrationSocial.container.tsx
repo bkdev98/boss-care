@@ -1,22 +1,24 @@
 import React from 'react';
-import {/**useDispatch,*/ useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 // import {ICredential} from '@entities/credential';
-// import {login} from '@actions';
+import {authSocial} from '@actions';
 import {RootState} from '@reducers';
 import {SCREENS} from '@navigation';
 
 import RegistrationSocialView from './RegistrationSocial.view';
 
 const RegistrationSocialContainer = ({navigation}: {navigation: any}) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const {beingAuth} = useSelector((state: RootState) => state.auth);
 
   function handleSignIn() {
     navigation.push(SCREENS.AUTH.LOGIN);
   }
 
-  function handleContinueFacebook() {}
+  function handleContinueFacebook() {
+    dispatch(authSocial());
+  }
 
   function handleContinueGoogle() {}
 

@@ -1,6 +1,6 @@
 import {IAction} from '@utils/redux';
 
-import {GENERATE_REQUEST_TOKEN, LOGIN, LOGOUT} from '@actions';
+import {GENERATE_REQUEST_TOKEN, LOGIN, AUTH_SOCIAL, LOGOUT} from '@actions';
 
 interface AuthState {
   isAuth: boolean;
@@ -18,6 +18,11 @@ const INITIAL_STATE: AuthState = {
 
 export default (state = INITIAL_STATE, action: IAction) => {
   switch (action.type) {
+    case AUTH_SOCIAL:
+      return {
+        ...state,
+        isAuth: true,
+      };
     case GENERATE_REQUEST_TOKEN.SUCCESS:
       return {
         ...state,

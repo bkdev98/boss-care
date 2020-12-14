@@ -31,3 +31,10 @@ export const logout = () => {
     type: LOGOUT,
   };
 };
+
+export const AUTH_SOCIAL = 'AUTH_SOCIAL';
+export function authSocial() {
+  return {
+    type: AUTH_SOCIAL,
+  };
+}
