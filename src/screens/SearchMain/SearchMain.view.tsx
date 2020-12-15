@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, FlatList, View, Pressable} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Layout from '@components/Layout';
+import Button from '@components/Button';
 import Typography from '@components/Typography';
 import IconButton from '@components/IconButton';
+
 import SearchIcon from '@components/Icon/Search';
 import VetIcon from '@components/Icon/Vet';
 import GroomingIcon from '@components/Icon/Grooming';
@@ -21,7 +23,10 @@ import theme from '@theme';
 
 import styles from './styles';
 
-interface SearchMainScreenProps {}
+interface SearchMainScreenProps {
+  onShowAddPetModal: (content: JSX.Element) => void;
+  onHideAddPetModal: () => void;
+}
 
 const SERVICES = [
   {
@@ -71,8 +76,44 @@ const SERVICES = [
   },
 ];
 
-const SearchMainScreen: React.FC<SearchMainScreenProps> = () => {
+const SearchMainScreen: React.FC<SearchMainScreenProps> = ({
+  onShowAddPetModal,
+  onHideAddPetModal,
+}) => {
   const insets = useSafeAreaInsets();
+
+  useEffect(() => {
+    setTimeout(
+      () =>
+        onShowAddPetModal(
+          <>
+            <View style={styles.modalContent}>
+              <View style={styles.modalContentItem}>
+                <View style={styles.modalContentItemMarker} />
+                <Typography variant="body1">Faster check-in at appointment.</Typography>
+              </View>
+              <View style={styles.modalContentItem}>
+                <View style={styles.modalContentItemMarker} />
+                <Typography variant="body1">
+                  Schedule of vaccination, haircuts, inspections etc.
+                </Typography>
+              </View>
+              <View style={styles.modalContentItem}>
+                <View style={styles.modalContentItemMarker} />
+                <Typography variant="body1">
+                  Reminder of the upcoming events with your pet.
+                </Typography>
+              </View>
+            </View>
+            <View style={styles.modalActions}>
+              <Button label="+ Add" variant="primary" style={styles.modalAction} />
+              <Button label="No, later" onPress={onHideAddPetModal} style={styles.modalAction} />
+            </View>
+          </>,
+        ),
+      1000,
+    );
+  }, []);
 
   function renderServiceItem({item}: {item: any}) {
     return (

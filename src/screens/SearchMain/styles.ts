@@ -47,4 +47,29 @@ export default StyleSheet.create({
   separator: {
     marginVertical: getScalableSize.h(8),
   },
+  modalContent: {
+    paddingHorizontal: getScalableSize.w(40),
+  },
+  modalContentItem: {
+    flexDirection: 'row',
+    marginBottom: getScalableSize.h(16),
+  },
+  modalContentItemMarker: {
+    width: getScalableSize.w(8),
+    height: getScalableSize.w(8),
+    borderRadius: getScalableSize.w(8 / 2),
+    backgroundColor: theme.colors.orange,
+    marginRight: getScalableSize.w(16),
+    marginTop: getScalableSize.h(8),
+  },
+  modalActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: getScalableSize.h(24),
+    paddingHorizontal: getScalableSize.w(15 + 7.5),
+  },
+  modalAction: {
+    flexGrow: 1,
+    marginHorizontal: getScalableSize.w(7.5),
+  },
 });
