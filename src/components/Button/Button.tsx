@@ -27,11 +27,21 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   function renderLeftIcon() {
-    return leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>;
+    return (
+      leftIcon && (
+        <View style={[styles.leftIcon, size === 'small' && styles.leftIconSmall]}>{leftIcon}</View>
+      )
+    );
   }
 
   function renderRightIcon() {
-    return rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>;
+    return (
+      rightIcon && (
+        <View style={[styles.rightIcon, size === 'small' && styles.rightIconSmall]}>
+          {rightIcon}
+        </View>
+      )
+    );
   }
 
   return (

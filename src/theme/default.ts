@@ -6,6 +6,7 @@ export default {
     danger: '#FC595B',
     white: '#FFFFFF',
     lightGray: '#F8F7FB',
+    lightGray2: '#F0F0F8',
     orange: '#F1A852',
     violet: '#4552CB',
     darkBlue: '#2E1E7A',
@@ -46,6 +47,7 @@ export default {
       shadowOpacity: 0.08,
       shadowOffset: {width: 4, height: 6},
       shadowRadius: 28,
+      elevation: 5,
     },
   },
   fonts: {

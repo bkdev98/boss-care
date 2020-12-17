@@ -14,6 +14,7 @@ import RegistrationSocialScreen from '@screens/Authentication/RegistrationSocial
 import RegistrationEmailScreen from '@screens/Authentication/RegistrationEmail';
 import LoginScreen from '@screens/Authentication/Login';
 import SearchMainScreen from '@screens/SearchMain';
+import ProfileScreen from '@screens/Profile';
 
 import TabSearchIcon from '@components/Icon/TabSearch';
 import TabAppointmentsIcon from '@components/Icon/TabAppointments';
@@ -70,7 +71,7 @@ const AppTab = () => {
       <Tab.Screen name={SCREENS.SEARCH_MAIN} component={SearchMainScreen} />
       <Tab.Screen name={SCREENS.APPOINTMENTS} component={SearchMainScreen} />
       <Tab.Screen name={SCREENS.EXPLORE} component={SearchMainScreen} />
-      <Tab.Screen name={SCREENS.PROFILE} component={SearchMainScreen} />
+      <Tab.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
     </Tab.Navigator>
   );
 };

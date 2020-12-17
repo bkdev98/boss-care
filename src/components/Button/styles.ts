@@ -87,4 +87,10 @@ export default StyleSheet.create({
   rightIcon: {
     marginLeft: getScalableSize.w(16),
   },
+  leftIconSmall: {
+    marginRight: getScalableSize.w(4),
+  },
+  rightIconSmall: {
+    marginLeft: getScalableSize.w(4),
+  },
 });
