@@ -49,6 +49,13 @@ export default {
       shadowRadius: 28,
       elevation: 5,
     },
+    blueShadow: {
+      shadowColor: 'rgba(46, 30, 122, 0.2)',
+      shadowOpacity: 1,
+      shadowOffset: {width: 1, height: 1},
+      shadowRadius: 1,
+      elevation: 1,
+    },
   },
   fonts: {
     bold: 'EncodeSans-Bold',

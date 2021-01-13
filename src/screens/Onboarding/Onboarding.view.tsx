@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {Animated, ScrollView, Dimensions, View} from 'react-native';
+import {StatusBar, Animated, ScrollView, Dimensions, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AirbnbRating} from 'react-native-ratings';
@@ -176,6 +176,7 @@ const OnboardingView: React.FC<OnboardingViewProps> = ({onFinish, onLogin}) => {
 
   return (
     <Layout withoutSafeAreaView>
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
       <LinearGradient
         colors={theme.colors.gradientBg}
         style={[styles.wrapper, {paddingTop: insets.top, paddingBottom: insets.bottom}]}>

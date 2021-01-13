@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, PressableProps, TextStyle, View} from 'react-native';
+import {Pressable, PressableProps, TextStyle, ViewStyle, View} from 'react-native';
 
 import Typography from '@components/Typography';
 
@@ -12,7 +12,10 @@ interface ButtonProps extends PressableProps {
   disabled?: boolean;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
-  labelStyle?: TextStyle;
+  leftIconStyle?: ViewStyle;
+  rightIconStyle?: ViewStyle;
+  style?: ViewStyle | ViewStyle[] | any;
+  labelStyle?: TextStyle | TextStyle[] | any;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,13 +26,17 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   leftIcon,
   rightIcon,
+  leftIconStyle,
+  rightIconStyle,
   labelStyle,
   ...props
 }) => {
   function renderLeftIcon() {
     return (
       leftIcon && (
-        <View style={[styles.leftIcon, size === 'small' && styles.leftIconSmall]}>{leftIcon}</View>
+        <View style={[styles.leftIcon, size === 'small' && styles.leftIconSmall, leftIconStyle]}>
+          {leftIcon}
+        </View>
       )
     );
   }
@@ -37,7 +44,7 @@ const Button: React.FC<ButtonProps> = ({
   function renderRightIcon() {
     return (
       rightIcon && (
-        <View style={[styles.rightIcon, size === 'small' && styles.rightIconSmall]}>
+        <View style={[styles.rightIcon, size === 'small' && styles.rightIconSmall, rightIconStyle]}>
           {rightIcon}
         </View>
       )

@@ -15,6 +15,7 @@ import RegistrationEmailScreen from '@screens/Authentication/RegistrationEmail';
 import LoginScreen from '@screens/Authentication/Login';
 import SearchMainScreen from '@screens/SearchMain';
 import ProfileScreen from '@screens/Profile';
+import AddPetDetailScreen from '@screens/AddPetDetail';
 
 import TabSearchIcon from '@components/Icon/TabSearch';
 import TabAppointmentsIcon from '@components/Icon/TabAppointments';
@@ -36,6 +37,7 @@ export const SCREENS = {
   APPOINTMENTS: 'Appointments',
   EXPLORE: 'Explore',
   PROFILE: 'Profile',
+  ADD_PET_DETAIL: 'AddPetDetail',
 };
 
 const Tab = createBottomTabNavigator();
@@ -101,6 +103,11 @@ const AppNavigation = () => {
         ) : (
           <>
             <Stack.Screen name={SCREENS.APP_TAB} component={AppTab} />
+            <Stack.Screen
+              name={SCREENS.ADD_PET_DETAIL}
+              component={AddPetDetailScreen}
+              initialParams={{initial: false}}
+            />
           </>
         )}
       </Stack.Navigator>

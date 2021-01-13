@@ -12,11 +12,22 @@ import IconButton from '@components/IconButton';
 import CloseIcon from '@components/Icon/Close';
 import getScalableSize from '@utils/getScalableSize';
 
-const Modalization: React.FC<ModalizeProps> = (props) => {
+interface ModalizationProps extends ModalizeProps {
+  useInternalProps?: boolean;
+  open?: boolean;
+  content?: JSX.Element;
+  title?: string;
+}
+
+const Modalization: React.FC<ModalizationProps> = (props) => {
   const modalize = useRef<Modalize>(null);
   const insets = useSafeAreaInsets();
-  const {open, content, title} = useSelector((state: RootState) => state.modalize);
+  const modalizeStore = useSelector((state: RootState) => state.modalize);
   const dispatch = useDispatch();
+
+  const open = props.useInternalProps ? props.open : modalizeStore.open;
+  const content = props.useInternalProps ? props.content : modalizeStore.content;
+  const title = props.useInternalProps ? props.title : modalizeStore.title;
 
   const styles = StyleSheet.create({
     wrapper: {
@@ -49,7 +60,8 @@ const Modalization: React.FC<ModalizeProps> = (props) => {
   }, [open]);
 
   function handleClose() {
-    dispatch(hideModalize());
+    props.onClose?.();
+    !props.useInternalProps && dispatch(hideModalize());
   }
 
   return (

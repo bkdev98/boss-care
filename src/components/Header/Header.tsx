@@ -2,19 +2,40 @@ import React from 'react';
 import {View, StyleSheet, ViewStyle} from 'react-native';
 
 import Typography from '@components/Typography';
+import IconButton from '@components/IconButton';
+import BackIcon from '@components/Icon/ArrowLeft';
 import getScalableSize from '@utils/getScalableSize';
+import theme from '@theme';
+import NavigationService from '@navigation/service';
 
 interface HeaderProps {
   title?: string;
   leftButton?: JSX.Element;
   rightButton?: JSX.Element;
   style?: ViewStyle;
+  bordered?: boolean;
+  showBack?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({style, leftButton, rightButton, title}) => {
+const Header: React.FC<HeaderProps> = ({
+  style,
+  leftButton,
+  rightButton,
+  title,
+  bordered,
+  showBack,
+}) => {
   return (
-    <View style={[styles.wrapper, style]}>
-      <View style={styles.leftButton}>{leftButton}</View>
+    <View style={[styles.wrapper, bordered && styles.bordered, style]}>
+      <View style={styles.leftButton}>
+        {showBack ? (
+          <IconButton onPress={NavigationService.goBack}>
+            <BackIcon primary />
+          </IconButton>
+        ) : (
+          leftButton
+        )}
+      </View>
       <Typography variant="h3" style={styles.title}>
         {title}
       </Typography>
@@ -29,7 +50,7 @@ const styles = StyleSheet.create({
     height: getScalableSize.h(44),
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: getScalableSize.w(20),
+    paddingHorizontal: getScalableSize.w(8),
   },
   leftButton: {
     flex: 1,
@@ -44,6 +65,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexGrow: 3,
     flex: 1,
+  },
+  bordered: {
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.lightGray2,
   },
 });
 

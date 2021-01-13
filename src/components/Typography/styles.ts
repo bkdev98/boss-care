@@ -30,8 +30,13 @@ export default StyleSheet.create({
   },
   h5: {
     color: theme.colors.black,
-    fontFamily: theme.fonts.bold,
+    fontFamily: theme.fonts.semiBold,
     fontSize: getScalableSize.f(14),
+  },
+  h6: {
+    color: theme.colors.black,
+    fontFamily: theme.fonts.semiBold,
+    fontSize: getScalableSize.f(13),
   },
   body1: {
     color: theme.colors.black,
@@ -66,13 +71,13 @@ export default StyleSheet.create({
   title: {
     color: theme.colors.text_title,
     fontSize: getScalableSize.f(28),
-    fontWeight: '700',
+    fontFamily: theme.fonts.bold,
     letterSpacing: 0.2,
   },
   subTitle: {
     color: theme.colors.text_subTitle,
     fontSize: getScalableSize.f(28),
-    fontWeight: '700',
+    fontFamily: theme.fonts.bold,
     letterSpacing: 0.2,
   },
   caption: {
@@ -84,7 +89,7 @@ export default StyleSheet.create({
   buttonLabel: {
     color: theme.colors.text_paragraph,
     fontSize: getScalableSize.f(14),
-    fontWeight: '700',
+    fontFamily: theme.fonts.bold,
     letterSpacing: 0.2,
     textAlign: 'center',
   },

@@ -41,7 +41,7 @@ const RegistrationEmailView: React.FC<RegistrationEmailViewProps> = ({
 
   return (
     <Layout withoutSafeAreaView>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
       <LinearGradient
         colors={theme.colors.blueViolet}
         start={{x: 0, y: 0}}

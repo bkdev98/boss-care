@@ -74,7 +74,7 @@ const SplashView: React.FC<SplashViewProps> = ({onFinish}) => {
 
   return (
     <Layout withoutSafeAreaView>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <LinearGradient
         colors={theme.colors.blueViolet}
         start={{x: 0, y: 0}}

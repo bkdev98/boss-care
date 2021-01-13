@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Text, FlatList, View, Pressable} from 'react-native';
+import {Text, FlatList, View, Pressable, StatusBar} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -26,6 +26,7 @@ import styles from './styles';
 interface SearchMainScreenProps {
   onShowAddPetModal: (content: JSX.Element) => void;
   onHideAddPetModal: () => void;
+  onAddPetDetail: () => void;
 }
 
 const SERVICES = [
@@ -79,6 +80,7 @@ const SERVICES = [
 const SearchMainScreen: React.FC<SearchMainScreenProps> = ({
   onShowAddPetModal,
   onHideAddPetModal,
+  onAddPetDetail,
 }) => {
   const insets = useSafeAreaInsets();
 
@@ -106,7 +108,12 @@ const SearchMainScreen: React.FC<SearchMainScreenProps> = ({
               </View>
             </View>
             <View style={styles.modalActions}>
-              <Button label="+ Add" variant="primary" style={styles.modalAction} />
+              <Button
+                label="+ Add"
+                variant="primary"
+                style={styles.modalAction}
+                onPress={onAddPetDetail}
+              />
               <Button label="No, later" onPress={onHideAddPetModal} style={styles.modalAction} />
             </View>
           </>,
@@ -128,11 +135,12 @@ const SearchMainScreen: React.FC<SearchMainScreenProps> = ({
 
   return (
     <Layout withoutSafeAreaView>
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
       <LinearGradient
         colors={theme.colors.gradientBg}
         style={[styles.linearBg, {paddingTop: insets.top, paddingBottom: insets.bottom}]}>
         <View style={styles.header}>
-          <IconButton onPress={() => {}}>
+          <IconButton pressedStyle={{backgroundColor: theme.colors.background}} onPress={() => {}}>
             <SearchIcon />
           </IconButton>
         </View>

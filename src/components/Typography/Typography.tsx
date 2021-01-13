@@ -12,6 +12,7 @@ interface TypographyProps extends TextProps {
     | 'h3'
     | 'h4'
     | 'h5'
+    | 'h6'
     | 'button'
     | 'body1'
     | 'body2'

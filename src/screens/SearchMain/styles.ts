@@ -12,6 +12,7 @@ export default StyleSheet.create({
     height: getScalableSize.h(44),
     alignItems: 'flex-end',
     justifyContent: 'center',
+    paddingHorizontal: getScalableSize.w(8),
   },
   container: {
     paddingTop: getScalableSize.h(64),

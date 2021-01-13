@@ -5,12 +5,14 @@ import getScalableSize from '@utils/getScalableSize';
 import theme from '@theme';
 
 import DefaultUserIcon from '@components/Icon/DefaultUser';
+import DefaultBossIcon from '@components/Icon/DefaultBoss';
 
 interface AvatarProps {
   variant?: 'circleFull' | 'smoothFull' | 'smoothMedium' | 'smoothSmall';
   wrapperStyle?: ViewStyle;
   style?: ImageStyle;
   uri?: string;
+  boss?: boolean;
 }
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -18,12 +20,15 @@ const Avatar: React.FC<AvatarProps> = ({
   wrapperStyle,
   style,
   uri,
+  boss,
   ...props
 }) => {
   return (
     <View style={[styles.wrapper, styles[variant], wrapperStyle]}>
       {uri ? (
         <Image style={[styles.base, styles[variant], style]} {...props} source={{uri}} />
+      ) : boss ? (
+        <DefaultBossIcon />
       ) : (
         <DefaultUserIcon />
       )}

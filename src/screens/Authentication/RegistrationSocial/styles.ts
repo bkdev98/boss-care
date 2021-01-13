@@ -26,4 +26,7 @@ export default StyleSheet.create({
   emailBtn: {
     marginBottom: getScalableSize.h(80),
   },
+  clearFontFam: {
+    fontFamily: '',
+  },
 });

@@ -31,7 +31,7 @@ const RegistrationSocialView: React.FC<RegistrationSocialViewProps> = ({
 
   return (
     <Layout withoutSafeAreaView>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
       <LinearGradient
         colors={theme.colors.blueViolet}
         start={{x: 0, y: 0}}
@@ -45,7 +45,7 @@ const RegistrationSocialView: React.FC<RegistrationSocialViewProps> = ({
             label={
               <>
                 <Text style={{fontFamily: theme.fonts.regular}}>Continue with </Text>
-                <Text>Facebook</Text>
+                <Text style={{fontFamily: theme.fonts.bold}}>Facebook</Text>
               </>
             }
             leftIcon={<FacebookIcon />}
@@ -53,12 +53,13 @@ const RegistrationSocialView: React.FC<RegistrationSocialViewProps> = ({
             disabled={loading}
             onPress={onContinueFacebook}
             style={styles.facebookBtn}
+            labelStyle={styles.clearFontFam}
           />
           <Button
             label={
               <>
                 <Text style={{fontFamily: theme.fonts.regular}}>Continue with </Text>
-                <Text>Google</Text>
+                <Text style={{fontFamily: theme.fonts.bold}}>Google</Text>
               </>
             }
             leftIcon={<GoogleIcon />}
@@ -66,6 +67,7 @@ const RegistrationSocialView: React.FC<RegistrationSocialViewProps> = ({
             disabled={loading}
             onPress={onContinueGoogle}
             style={styles.googleBtn}
+            labelStyle={styles.clearFontFam}
           />
           <Button
             label="Register with Email"
@@ -77,11 +79,12 @@ const RegistrationSocialView: React.FC<RegistrationSocialViewProps> = ({
             label={
               <>
                 <Text style={{fontFamily: theme.fonts.regular}}>Already have an account? </Text>
-                <Text>Sign In</Text>
+                <Text style={{fontFamily: theme.fonts.bold}}>Sign In</Text>
               </>
             }
             variant="ghostWhite"
             onPress={onSignIn}
+            labelStyle={styles.clearFontFam}
           />
         </ScrollView>
       </LinearGradient>
