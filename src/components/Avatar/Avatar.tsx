@@ -13,6 +13,7 @@ interface AvatarProps {
   style?: ImageStyle;
   uri?: string;
   boss?: boolean;
+  extra?: JSX.Element;
 }
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -21,6 +22,7 @@ const Avatar: React.FC<AvatarProps> = ({
   style,
   uri,
   boss,
+  extra,
   ...props
 }) => {
   return (
@@ -32,6 +34,7 @@ const Avatar: React.FC<AvatarProps> = ({
       ) : (
         <DefaultUserIcon />
       )}
+      {extra}
     </View>
   );
 };

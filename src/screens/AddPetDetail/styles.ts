@@ -33,4 +33,18 @@ export default StyleSheet.create({
     flex: 1,
     flexGrow: 1,
   },
+  editAvatar: {
+    width: getScalableSize.w(30),
+    height: getScalableSize.w(30),
+    borderRadius: getScalableSize.w(30 / 2),
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 2,
+    paddingLeft: 2,
+  },
+  editAvatarWrapper: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  },
 });

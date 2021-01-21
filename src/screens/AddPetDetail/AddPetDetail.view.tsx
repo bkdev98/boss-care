@@ -1,6 +1,14 @@
-import React from 'react';
-import {View, ScrollView, KeyboardAvoidingView, Platform, StatusBar} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 import {Formik} from 'formik';
+import LinearGradient from 'react-native-linear-gradient';
 
 import theme from '@theme';
 
@@ -9,6 +17,7 @@ import Header from '@components/Header';
 import Button from '@components/Button';
 import Avatar from '@components/Avatar';
 import Typography from '@components/Typography';
+import ImagePicker from '@components/ImagePicker';
 
 import {petValidationSchema} from '@utils/validationSchema';
 import {
@@ -18,6 +27,8 @@ import {
   FormikSwitchInput,
 } from '@components/Formik';
 import {FormikTextInputWithoutAutoFocus} from '@components/Formik/FormikTextInput';
+import PlusIcon from '@components/Icon/Plus';
+
 import ReminderInputList from './components/ReminderInputList';
 
 import styles from './styles';
@@ -127,6 +138,22 @@ interface AddPetDetailViewProps {
 }
 
 const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
+  const [showAvatarPicker, setShowAvatarPicker] = useState(false);
+
+  function renderEditAvatar() {
+    return (
+      <TouchableOpacity
+        onPress={() => setShowAvatarPicker(true)}
+        activeOpacity={1}
+        hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}
+        style={styles.editAvatarWrapper}>
+        <LinearGradient colors={theme.colors.blueViolet} style={styles.editAvatar}>
+          <PlusIcon style={theme.effects.blueShadow} />
+        </LinearGradient>
+      </TouchableOpacity>
+    );
+  }
+
   function handleSubmit(values: any) {
     console.log(values);
   }
@@ -146,6 +173,7 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
         <ScrollView style={styles.wrapper} contentContainerStyle={styles.container}>
           <Formik
             initialValues={{
+              avatar: '',
               name: '',
               species: null,
               breed: null,
@@ -157,7 +185,12 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
             {(formikProps) => (
               <FormikForm style={styles.formWrapper}>
                 <View style={styles.section}>
-                  <Avatar boss wrapperStyle={styles.avatar} />
+                  <Avatar
+                    boss
+                    wrapperStyle={styles.avatar}
+                    extra={renderEditAvatar()}
+                    uri={formikProps.values.avatar}
+                  />
                   <Typography variant="h3" style={styles.sectionTitle}>
                     General information
                   </Typography>
@@ -259,6 +292,14 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
                     onPress={formikProps.handleSubmit}
                   />
                 </View>
+                <ImagePicker
+                  label="Select avatar"
+                  open={showAvatarPicker}
+                  onSelect={(uri) => {
+                    formikProps.setFieldValue('avatar', uri);
+                    setShowAvatarPicker(false);
+                  }}
+                />
               </FormikForm>
             )}
           </Formik>

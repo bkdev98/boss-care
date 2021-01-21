@@ -72,7 +72,7 @@ const SelectInput: React.FC<SelectInputProps> = forwardRef(
 
       function onSelectItem() {
         onSelect?.(item);
-        setFieldValue(item.key);
+        setFieldValue?.(item.key);
         setIsActive(false);
         onSubmitEditing?.();
       }

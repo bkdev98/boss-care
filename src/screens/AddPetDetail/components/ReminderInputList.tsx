@@ -217,12 +217,14 @@ const styles = StyleSheet.create({
   },
   reminderAddItem: {
     backgroundColor: theme.colors.lightGray2,
+    elevation: 0,
+    shadowOpacity: 0,
   },
   reminderList: {
     marginHorizontal: -getScalableSize.w(20),
-    paddingVertical: getScalableSize.h(24),
   },
   reminderListContainer: {
+    paddingVertical: getScalableSize.h(24),
     paddingHorizontal: getScalableSize.w(20),
   },
   plusIcon: {
