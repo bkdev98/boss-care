@@ -133,8 +133,11 @@ const TextInput: React.FC<TextInputProps> = React.forwardRef(
               ? theme.colors.danger
               : fieldStatus.focused
               ? labelColor
-              : theme.colors.gray,
+              : fieldStatus.actived
+              ? theme.colors.gray
+              : theme.colors.black,
             fontSize: labelFontSize,
+            fontFamily: !fieldStatus.actived ? theme.fonts.regular : theme.fonts.semiBold,
             transform: [{translateY: labelTranslateY}],
           }}
           variant="inputLabel">

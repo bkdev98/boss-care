@@ -27,7 +27,7 @@ export interface SelectInputProps {
   style?: ViewStyle;
   setFieldValue?: any;
   isFocused?: boolean;
-  value?: ISelectOption | Date;
+  value?: string | Date;
   placeholder?: string;
   options?: ISelectOption[] | 'dates';
   onSelect?: any;
@@ -68,11 +68,11 @@ const SelectInput: React.FC<SelectInputProps> = forwardRef(
     }));
 
     function renderOption({item}: {item: ISelectOption}) {
-      const isSelected = value?.key === item.key;
+      const isSelected = value === item.key;
 
       function onSelectItem() {
         onSelect?.(item);
-        setFieldValue(item);
+        setFieldValue(item.key);
         setIsActive(false);
         onSubmitEditing?.();
       }
@@ -127,8 +127,11 @@ const SelectInput: React.FC<SelectInputProps> = forwardRef(
           </Typography>
           <View style={[styles.container, style, (isActive || Boolean(value)) && styles.active]}>
             <Typography style={[styles.default, style]}>
-              {(options === 'dates' && !!value ? moment(value).format('ll') : value?.label) ||
-                placeholder}
+              {(options === 'dates'
+                ? value
+                  ? moment(value).format('ll')
+                  : placeholder
+                : options.find((i) => i.key === value)?.label) || placeholder}
             </Typography>
           </View>
           {renderRightIcon()}

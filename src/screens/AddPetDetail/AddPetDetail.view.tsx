@@ -1,16 +1,6 @@
 import React from 'react';
-import {
-  View,
-  FlatList,
-  Pressable,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  StatusBar,
-} from 'react-native';
+import {View, ScrollView, KeyboardAvoidingView, Platform, StatusBar} from 'react-native';
 import {Formik} from 'formik';
-import moment from 'moment';
-import LinearGradient from 'react-native-linear-gradient';
 
 import theme from '@theme';
 
@@ -19,7 +9,6 @@ import Header from '@components/Header';
 import Button from '@components/Button';
 import Avatar from '@components/Avatar';
 import Typography from '@components/Typography';
-import PlusIcon from '@components/Icon/Plus';
 
 import {petValidationSchema} from '@utils/validationSchema';
 import {
@@ -29,9 +18,9 @@ import {
   FormikSwitchInput,
 } from '@components/Formik';
 import {FormikTextInputWithoutAutoFocus} from '@components/Formik/FormikTextInput';
+import ReminderInputList from './components/ReminderInputList';
 
 import styles from './styles';
-import {getContext} from 'recompose';
 
 const SPECIES = [
   {
@@ -133,49 +122,13 @@ const BREEDS = {
   ],
 };
 
-interface IReminder {
-  id: string;
-  name: string;
-  isOnce?: boolean;
-  time?: Date;
-  periodNumber?: number;
-  periodUnit?: 'day' | 'week' | 'month' | 'year';
-}
-
 interface AddPetDetailViewProps {
   loading?: boolean;
 }
 
 const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
-  function handleSubmit(values) {
+  function handleSubmit(values: any) {
     console.log(values);
-  }
-
-  function renderReminderItem({item}: {item: IReminder}) {
-    return (
-      <Pressable style={styles.reminderItem}>
-        <Typography variant="h5">{item.name}</Typography>
-        <Typography variant="body3">{moment(item.time).calendar()}</Typography>
-      </Pressable>
-    );
-  }
-
-  function renderAddReminder() {
-    return (
-      <Pressable
-        style={({pressed}) => [
-          styles.reminderItem,
-          styles.reminderAddItem,
-          pressed && styles.remiderItemPressed,
-        ]}>
-        <View style={styles.plusIconWrapper}>
-          <LinearGradient colors={theme.colors.blueViolet} style={styles.plusIcon}>
-            <PlusIcon style={theme.effects.blueShadow} />
-          </LinearGradient>
-        </View>
-        <Typography variant="h5">Add event</Typography>
-      </Pressable>
-    );
   }
 
   return (
@@ -187,7 +140,9 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
         title="Add pet detail"
         rightButton={<Button size="small" variant="ghost" label="Skip" />}
       />
-      <KeyboardAvoidingView style={styles.wrapper} behavior={Platform.OS === 'ios' && 'padding'}>
+      <KeyboardAvoidingView
+        style={styles.wrapper}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView style={styles.wrapper} contentContainerStyle={styles.container}>
           <Formik
             initialValues={{
@@ -220,7 +175,7 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
                     wrapperStyle={styles.formInput}
                     options={SPECIES}
                     onSelect={(value: any) =>
-                      value.key !== (formikProps.values.species as any)?.key &&
+                      value.key !== formikProps.values.species &&
                       formikProps.setFieldValue('breed', null)
                     }
                   />
@@ -228,7 +183,11 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
                     name="breed"
                     label="Breed"
                     wrapperStyle={styles.formInput}
-                    options={(BREEDS as any)[(formikProps.values.species as any)?.key] || []}
+                    options={
+                      formikProps.values.species
+                        ? (BREEDS as any)[formikProps.values.species || '']
+                        : []
+                    }
                   />
                   <FormikGenderInput name="gender" label="Gender" wrapperStyle={styles.formInput} />
                   <FormikSelectInput
@@ -289,14 +248,9 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
                     Add vaccines, haircuts, pills, estrus, etc. and you will receive notifications
                     for the next event.
                   </Typography>
-                  <FlatList
+                  <ReminderInputList
                     data={formikProps.values.reminders}
-                    renderItem={renderReminderItem}
-                    keyExtractor={(item) => item.id}
-                    horizontal
-                    ListHeaderComponent={renderAddReminder}
-                    style={styles.reminderList}
-                    contentContainerStyle={styles.reminderListContainer}
+                    onChange={(data) => formikProps.setFieldValue('reminders', data)}
                   />
                   <Button
                     label="Save"

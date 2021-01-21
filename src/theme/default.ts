@@ -54,7 +54,6 @@ export default {
       shadowOpacity: 1,
       shadowOffset: {width: 1, height: 1},
       shadowRadius: 1,
-      elevation: 1,
     },
   },
   fonts: {
