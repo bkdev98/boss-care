@@ -1,4 +1,7 @@
-import {withNextInputAutoFocusInput, withFormikControl} from 'react-native-formik';
+import {
+  // withNextInputAutoFocusInput,
+  withFormikControl,
+} from 'react-native-formik';
 import {compose} from 'recompose';
 
 import SelectInput from '@components/SelectInput';
@@ -10,5 +13,5 @@ interface FormikSelectInputProps extends SelectInputProps {
 
 export default compose<SelectInputProps, FormikSelectInputProps>(
   withFormikControl,
-  withNextInputAutoFocusInput,
+  // withNextInputAutoFocusInput,
 )(SelectInput);

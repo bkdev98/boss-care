@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, FlatList, Pressable, ScrollView, KeyboardAvoidingView} from 'react-native';
+import {
+  View,
+  FlatList,
+  Pressable,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import {Formik} from 'formik';
 import moment from 'moment';
 import LinearGradient from 'react-native-linear-gradient';
@@ -16,13 +24,14 @@ import PlusIcon from '@components/Icon/Plus';
 import {petValidationSchema} from '@utils/validationSchema';
 import {
   FormikForm,
-  FormikTextInput,
   FormikSelectInput,
   FormikGenderInput,
   FormikSwitchInput,
 } from '@components/Formik';
+import {FormikTextInputWithoutAutoFocus} from '@components/Formik/FormikTextInput';
 
 import styles from './styles';
+import {getContext} from 'recompose';
 
 const SPECIES = [
   {
@@ -171,13 +180,14 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
 
   return (
     <Layout>
+      <StatusBar backgroundColor={theme.colors.background} translucent={false} />
       <Header
         bordered
         showBack
         title="Add pet detail"
         rightButton={<Button size="small" variant="ghost" label="Skip" />}
       />
-      <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
+      <KeyboardAvoidingView style={styles.wrapper} behavior={Platform.OS === 'ios' && 'padding'}>
         <ScrollView style={styles.wrapper} contentContainerStyle={styles.container}>
           <Formik
             initialValues={{
@@ -196,7 +206,7 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
                   <Typography variant="h3" style={styles.sectionTitle}>
                     General information
                   </Typography>
-                  <FormikTextInput
+                  <FormikTextInputWithoutAutoFocus
                     name="name"
                     label="Pet's name"
                     wrapperStyle={styles.formInput}
@@ -265,7 +275,7 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
                     name="isPurebred"
                     wrapperStyle={[styles.formInput]}
                   />
-                  <FormikTextInput
+                  <FormikTextInputWithoutAutoFocus
                     name="nurseryName"
                     label="Pet's nursery name (optional)"
                     wrapperStyle={styles.formInput}

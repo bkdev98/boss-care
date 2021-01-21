@@ -1,4 +1,7 @@
-import {withNextInputAutoFocusInput, withFormikControl} from 'react-native-formik';
+import {
+  // withNextInputAutoFocusInput,
+  withFormikControl,
+} from 'react-native-formik';
 import {compose} from 'recompose';
 
 import GenderInput from '@components/GenderInput';
@@ -10,5 +13,5 @@ interface FormikGenderInputProps extends GenderInputProps {
 
 export default compose<GenderInputProps, FormikGenderInputProps>(
   withFormikControl,
-  withNextInputAutoFocusInput,
+  // withNextInputAutoFocusInput,
 )(GenderInput);

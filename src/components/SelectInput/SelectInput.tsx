@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useImperativeHandle, forwardRef} from 'react';
-import {View, ViewStyle, LayoutAnimation, FlatList, Pressable, StyleSheet} from 'react-native';
+import {View, ViewStyle, LayoutAnimation, FlatList, Pressable, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {Portal} from 'react-native-portalize';
@@ -139,35 +139,58 @@ const SelectInput: React.FC<SelectInputProps> = forwardRef(
           </Typography>
         </Pressable>
         <Portal>
-          <Modalization
-            useInternalProps
-            open={isActive}
-            title={label}
-            onClose={() => setIsActive(false)}
-            content={
-              options === 'dates' ? (
-                <View>
-                  <DateTimePicker
-                    value={value || new Date()}
-                    mode="date"
-                    display="spinner"
-                    onChange={(_, newDate) => setFieldValue(newDate || value)}
-                  />
-                  <Button
-                    label="Done"
-                    variant="primary"
-                    style={styles.doneBtn}
-                    onPress={() => {
-                      setIsActive(false);
-                      onSubmitEditing?.();
-                    }}
-                  />
-                </View>
-              ) : (
-                <FlatList data={options} renderItem={renderOption} />
-              )
-            }
-          />
+          {Platform.OS === 'ios' || options !== 'dates' ? (
+            <Modalization
+              useInternalProps
+              open={isActive}
+              title={label}
+              onClose={() => setIsActive(false)}
+              content={
+                options === 'dates' ? (
+                  <View>
+                    {isActive && (
+                      <DateTimePicker
+                        value={value || new Date()}
+                        mode="date"
+                        display="spinner"
+                        onChange={(_, newDate) => {
+                          setFieldValue(newDate || value);
+                        }}
+                        onTouchCancel={() => setIsActive(false)}
+                      />
+                    )}
+                    <Button
+                      label="Done"
+                      variant="primary"
+                      style={styles.doneBtn}
+                      onPress={() => {
+                        setIsActive(false);
+                        onSubmitEditing?.();
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <FlatList data={options} renderItem={renderOption} />
+                )
+              }
+            />
+          ) : (
+            <View>
+              {isActive && (
+                <DateTimePicker
+                  value={value || new Date()}
+                  mode="date"
+                  display="default"
+                  onChange={(_, newDate) => {
+                    setFieldValue(newDate || value);
+                    setIsActive(false);
+                    onSubmitEditing?.();
+                  }}
+                  onTouchCancel={() => setIsActive(false)}
+                />
+              )}
+            </View>
+          )}
         </Portal>
       </>
     );

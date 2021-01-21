@@ -122,9 +122,9 @@ const TextInput: React.FC<TextInputProps> = React.forwardRef(
     return (
       <View
         style={[
+          styles.wrapper,
           wrapperStyle,
           fieldStatus.focused && {backgroundColor: theme.colors.palegray},
-          styles.wrapper,
         ]}>
         <Typography
           animated

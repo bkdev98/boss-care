@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 
 import theme from '@theme';
 import getScalableSize from '@utils/getScalableSize';
@@ -7,15 +7,17 @@ export default StyleSheet.create({
   default: {
     fontSize: getScalableSize.f(16),
     textAlignVertical: 'center',
-    height: getScalableSize.h(34),
+    height: getScalableSize.h(Platform.OS === 'ios' ? 34 : 41),
     color: theme.colors.black,
     marginVertical: getScalableSize.h(5),
+    paddingHorizontal: 0,
     fontFamily: theme.fonts.regular,
     letterSpacing: 0.1,
     borderBottomWidth: getScalableSize.h(1),
     borderBottomColor: theme.colors.background_neutral_2,
   },
   wrapper: {
+    overflow: 'hidden',
     borderRadius: getScalableSize.w(20),
     paddingHorizontal: getScalableSize.w(10),
     paddingTop: getScalableSize.h(0),
@@ -28,7 +30,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: getScalableSize.w(6),
-    borderRadius: 20,
+    borderRadius: getScalableSize.w(20),
     zIndex: 1,
   },
   helper: {

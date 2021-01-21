@@ -13,6 +13,7 @@ export default StyleSheet.create({
   },
   container: {
     flexGrow: 1,
+    paddingBottom: getScalableSize.h(25),
   },
   section: {
     paddingHorizontal: getScalableSize.w(20),

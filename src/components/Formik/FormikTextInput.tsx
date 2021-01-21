@@ -19,3 +19,10 @@ export default compose<TextInputProps, FormikTextInputProps>(
   withNextInputAutoFocusInput,
   // withFormikControl,
 )(TextInput);
+
+export const FormikTextInputWithoutAutoFocus = compose<TextInputProps, FormikTextInputProps>(
+  handleTextInput,
+  // withFocus,
+  // withNextInputAutoFocusInput,
+  // withFormikControl,
+)(TextInput);
