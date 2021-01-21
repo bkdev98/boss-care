@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList, Pressable} from 'react-native';
+import {View, FlatList, Pressable, StatusBar} from 'react-native';
 
 import Layout from '@components/Layout';
 import Header from '@components/Header';
@@ -74,6 +74,7 @@ const ProfileView: React.FC<ProfileViewProps> = (props) => {
 
   return (
     <Layout>
+      <StatusBar translucent={false} />
       <Header
         title="Profile"
         rightButton={<Button size="small" variant="ghost" leftIcon={<EditIcon />} label="Edit" />}

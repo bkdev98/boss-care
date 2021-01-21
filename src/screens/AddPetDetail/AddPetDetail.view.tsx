@@ -134,10 +134,12 @@ const BREEDS = {
 };
 
 interface AddPetDetailViewProps {
+  initial?: boolean;
   loading?: boolean;
+  onAddPet?: (payload: any) => void;
 }
 
-const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
+const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading, initial, onAddPet}) => {
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
 
   function renderEditAvatar() {
@@ -156,6 +158,7 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
 
   function handleSubmit(values: any) {
     console.log(values);
+    onAddPet?.({...values, id: Date.now()});
   }
 
   return (
@@ -165,7 +168,7 @@ const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading}) => {
         bordered
         showBack
         title="Add pet detail"
-        rightButton={<Button size="small" variant="ghost" label="Skip" />}
+        rightButton={initial ? <Button size="small" variant="ghost" label="Skip" /> : undefined}
       />
       <KeyboardAvoidingView
         style={styles.wrapper}

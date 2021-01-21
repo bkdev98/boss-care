@@ -12,7 +12,7 @@ export const loginValidationSchema = Yup.object().shape({
 });
 
 export const petValidationSchema = Yup.object().shape({
-  pet: Yup.string().min(1).max(50).required(),
+  name: Yup.string().min(1).max(50).required(),
 });
 
 export const reminderValidationSchema = Yup.object().shape({
