@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   rightButton: {
     flex: 1,
     flexGrow: 1,
+    alignItems: 'flex-end',
   },
   title: {
     textAlign: 'center',

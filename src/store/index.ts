@@ -10,7 +10,7 @@ import {CONSTANTS} from '@constants';
 const persistConfig = {
   key: CONSTANTS.PERSIST_KEY,
   storage: AsyncStorage,
-  whitelist: ['auth', 'app'],
+  whitelist: ['auth', 'app', 'pet'],
   transforms: [createFilter('auth', ['isAuth', 'userInfo', 'requestToken'])],
 };
 

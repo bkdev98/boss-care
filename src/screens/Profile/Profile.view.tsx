@@ -1,6 +1,9 @@
 import React from 'react';
 import {View, FlatList, Pressable, StatusBar} from 'react-native';
 
+import {SCREENS} from '@navigation';
+import NavigationService from '@navigation/service';
+
 import Layout from '@components/Layout';
 import Header from '@components/Header';
 import Button from '@components/Button';
@@ -20,34 +23,35 @@ import styles from './styles';
 
 interface ProfileViewProps {}
 
-const MENU_ITEMS = [
-  {
-    title: 'My pets',
-    icon: <PetIcon />,
-  },
-  {
-    title: 'My favourites',
-    icon: <FavouriteIcon />,
-  },
-  {
-    title: 'Add pet service',
-    icon: <AddServiceIcon />,
-  },
-  {
-    title: 'Invite friends',
-    icon: <InviteIcon />,
-  },
-  {
-    title: 'Help',
-    icon: <HelpIcon />,
-  },
-  {
-    title: 'Settings',
-    icon: <SettingIcon />,
-  },
-];
+const ProfileView: React.FC<ProfileViewProps> = () => {
+  const MENU_ITEMS = [
+    {
+      title: 'My pets',
+      icon: <PetIcon />,
+      screen: SCREENS.MY_PETS,
+    },
+    {
+      title: 'My favourites',
+      icon: <FavouriteIcon />,
+    },
+    {
+      title: 'Add pet service',
+      icon: <AddServiceIcon />,
+    },
+    {
+      title: 'Invite friends',
+      icon: <InviteIcon />,
+    },
+    {
+      title: 'Help',
+      icon: <HelpIcon />,
+    },
+    {
+      title: 'Settings',
+      icon: <SettingIcon />,
+    },
+  ];
 
-const ProfileView: React.FC<ProfileViewProps> = (props) => {
   function renderProfile() {
     return (
       <View style={styles.profileWrapper}>
@@ -60,9 +64,11 @@ const ProfileView: React.FC<ProfileViewProps> = (props) => {
     );
   }
 
-  function renderMenuItem({item}) {
+  function renderMenuItem({item}: {item: any}) {
     return (
-      <Pressable style={({pressed}) => [styles.menuItemWrapper, pressed && styles.menuItemPressed]}>
+      <Pressable
+        onPress={() => NavigationService.push(item.screen)}
+        style={({pressed}) => [styles.menuItemWrapper, pressed && styles.menuItemPressed]}>
         <View style={styles.menuItemIcon}>{item.icon}</View>
         <View style={styles.menuItemContainer}>
           <Typography variant={'body1'}>{item.title}</Typography>

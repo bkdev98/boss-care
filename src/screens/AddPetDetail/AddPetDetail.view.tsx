@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import LinearGradient from 'react-native-linear-gradient';
+import {useSelector} from 'react-redux';
 
 import theme from '@theme';
+import {RootState} from '@reducers';
 
 import Layout from '@components/Layout';
 import Header from '@components/Header';
@@ -33,106 +35,6 @@ import ReminderInputList from './components/ReminderInputList';
 
 import styles from './styles';
 
-const SPECIES = [
-  {
-    key: 'dog',
-    label: 'Dog',
-  },
-  {
-    key: 'cat',
-    label: 'Cat',
-  },
-  {
-    key: 'bird',
-    label: 'Bird',
-  },
-];
-
-const BREEDS = {
-  dog: [
-    {
-      key: '1',
-      label: 'Labrador Retrievers',
-    },
-    {
-      key: '2',
-      label: 'German Shepherds',
-    },
-    {
-      key: '3',
-      label: 'Golden Retrievers',
-    },
-    {
-      key: '4',
-      label: 'French Bulldogs',
-    },
-    {
-      key: '5',
-      label: 'Beagles',
-    },
-    {
-      key: '6',
-      label: 'Poodles',
-    },
-    {
-      key: '7',
-      label: 'Rottweilers',
-    },
-  ],
-  cat: [
-    {
-      key: '8',
-      label: 'Siamese',
-    },
-    {
-      key: '9',
-      label: 'Persian',
-    },
-    {
-      key: '10',
-      label: 'Maine Coon',
-    },
-    {
-      key: '11',
-      label: 'Ragdoll',
-    },
-    {
-      key: '12',
-      label: 'Bengal',
-    },
-    {
-      key: '13',
-      label: 'Sphynx',
-    },
-  ],
-  bird: [
-    {
-      key: '14',
-      label: 'Parakeet/Budgie',
-    },
-    {
-      key: '15',
-      label: 'Cockatiel',
-    },
-    {
-      key: '16',
-      label: 'Finch',
-    },
-    {
-      key: '17',
-      label: 'Lovebird',
-    },
-    {
-      key: '18',
-      label: 'Dove',
-    },
-    {
-      key: '19',
-      label: 'Parrotlet',
-    },
-  ],
-};
-
 interface AddPetDetailViewProps {
   initial?: boolean;
   loading?: boolean;
@@ -140,6 +42,8 @@ interface AddPetDetailViewProps {
 }
 
 const AddPetDetailView: React.FC<AddPetDetailViewProps> = ({loading, initial, onAddPet}) => {
+  const BREEDS = useSelector((state: RootState) => state.app.breeds);
+  const SPECIES = useSelector((state: RootState) => state.app.species);
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
 
   function renderEditAvatar() {
