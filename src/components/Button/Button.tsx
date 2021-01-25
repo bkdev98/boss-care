@@ -7,7 +7,16 @@ import styles from './styles';
 
 interface ButtonProps extends PressableProps {
   label: string | JSX.Element;
-  variant?: 'default' | 'primary' | 'ghost' | 'secondary' | 'white' | 'ghostOutline' | 'ghostWhite';
+  variant?:
+    | 'default'
+    | 'primary'
+    | 'ghost'
+    | 'secondary'
+    | 'white'
+    | 'ghostOutline'
+    | 'ghostWhite'
+    | 'filter'
+    | 'filterGhost';
   size?: 'large' | 'small';
   disabled?: boolean;
   leftIcon?: JSX.Element;
@@ -57,8 +66,8 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       style={({pressed}) => [
         styles.button,
-        styles[variant],
         styles[size],
+        styles[variant],
         pressed && (styles as any)[`${variant}Pressed`],
         disabled && styles.disabled,
         style,

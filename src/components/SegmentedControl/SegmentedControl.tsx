@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: theme.fonts.semiBold,
+    fontSize: getScalableSize.f(14),
   },
 });
 

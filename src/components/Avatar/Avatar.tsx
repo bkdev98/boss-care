@@ -55,7 +55,11 @@ const styles = StyleSheet.create({
     borderRadius: getScalableSize.w(112 / 2),
   },
   smoothFull: {},
-  smoothMedium: {},
+  smoothMedium: {
+    width: getScalableSize.w(72),
+    height: getScalableSize.w(72),
+    borderRadius: getScalableSize.w(18),
+  },
   smoothSmall: {},
 });
 

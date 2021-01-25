@@ -28,6 +28,22 @@ export default StyleSheet.create({
   white: {
     backgroundColor: theme.colors.white,
   },
+  filter: {
+    backgroundColor: theme.colors.violet,
+    height: getScalableSize.h(28),
+    borderRadius: getScalableSize.h(6),
+  },
+  filterPressed: {
+    backgroundColor: theme.colors.darkBlue,
+  },
+  filterGhost: {
+    backgroundColor: theme.colors.lightGray2,
+    height: getScalableSize.h(28),
+    borderRadius: getScalableSize.h(6),
+  },
+  filterGhostPressed: {
+    backgroundColor: theme.colors.lightGray,
+  },
   ghost: {},
   ghostWhite: {},
   ghostOutline: {
@@ -76,6 +92,15 @@ export default StyleSheet.create({
   },
   whiteLabel: {
     color: theme.colors.violet,
+  },
+  filterLabel: {
+    color: theme.colors.white,
+    fontFamily: theme.fonts.semiBold,
+    fontSize: getScalableSize.f(14),
+  },
+  filterGhostLabel: {
+    fontFamily: theme.fonts.semiBold,
+    fontSize: getScalableSize.f(14),
   },
   smallLabel: {
     fontSize: getScalableSize.f(13),
