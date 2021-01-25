@@ -22,6 +22,7 @@ const ResultList: React.FC<ResultListProps> = ({data}) => {
       style={styles.wrapper}
       contentContainerStyle={styles.container}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
+      showsVerticalScrollIndicator={false}
     />
   );
 };
@@ -29,8 +30,9 @@ const ResultList: React.FC<ResultListProps> = ({data}) => {
 const styles = StyleSheet.create({
   wrapper: {},
   container: {
-    paddingVertical: getScalableSize.h(8),
+    paddingTop: getScalableSize.h(70),
     paddingHorizontal: getScalableSize.w(8),
+    paddingBottom: getScalableSize.h(8),
   },
   separator: {
     height: getScalableSize.h(8),

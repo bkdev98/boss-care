@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Platform, FlatList, StatusBar, Dimensions} from 'react-native';
+import {StyleSheet, View, Platform, StatusBar, Dimensions} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 
 import theme from '@theme';
 import Layout from '@components/Layout';
 import Header from '@components/Header';
-import Typography from '@components/Typography';
 import Button from '@components/Button';
 import MapPinIcon from '@components/Icon/MapPin';
 import SearchIcon from '@components/Icon/Search';
@@ -120,6 +119,11 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: getScalableSize.w(34),
     borderBottomRightRadius: getScalableSize.w(34),
     backgroundColor: theme.colors.background,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: getScalableSize.h(48 + 44),
+    zIndex: 1,
     ...theme.effects.plahaShadow,
     elevation: 0,
   },

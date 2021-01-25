@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, ViewStyle} from 'react-native';
-import {Rating} from 'react-native-ratings';
 
 import Typography from '@components/Typography';
 import Avatar from '@components/Avatar';
+import Rating from '@components/Rating';
 import WalletIcon from '@components/Icon/Wallet';
 import MapPinIcon from '@components/Icon/MapPin';
 import {ISpecialist} from '@entities/specialist';
@@ -25,15 +25,7 @@ const Card: React.FC<CardProps> = ({data, style, onPress}) => {
           <Typography variant="h3">{data.name}</Typography>
           <Typography variant="h5">{data.specialities}</Typography>
           <View style={styles.ratingWrapper}>
-            <Rating
-              showRating={false}
-              imageSize={getScalableSize.w(12)}
-              startingValue={data.rating}
-              ratingColor={theme.colors.yellow}
-            />
-            <Typography variant="caption" style={styles.totalReview}>
-              {data.totalReview} Reviews
-            </Typography>
+            <Rating rating={data.rating} totalReview={data.totalReview} />
           </View>
         </View>
       </View>
@@ -105,10 +97,6 @@ const styles = StyleSheet.create({
     marginTop: getScalableSize.h(8),
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  totalReview: {
-    color: theme.colors.gray,
-    marginLeft: getScalableSize.w(10),
   },
   caption: {
     color: theme.colors.gray,
