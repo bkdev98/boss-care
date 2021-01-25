@@ -12,6 +12,7 @@ interface HeaderProps {
   title?: string;
   leftButton?: JSX.Element;
   rightButton?: JSX.Element;
+  renderTitle?: JSX.Element;
   style?: ViewStyle;
   bordered?: boolean;
   showBack?: boolean;
@@ -24,6 +25,7 @@ const Header: React.FC<HeaderProps> = ({
   title,
   bordered,
   showBack,
+  renderTitle,
 }) => {
   return (
     <View style={[styles.wrapper, bordered && styles.bordered, style]}>
@@ -36,9 +38,11 @@ const Header: React.FC<HeaderProps> = ({
           leftButton
         )}
       </View>
-      <Typography variant="h3" style={styles.title}>
-        {title}
-      </Typography>
+      {renderTitle || (
+        <Typography variant="h3" style={styles.title}>
+          {title}
+        </Typography>
+      )}
       <View style={styles.rightButton}>{rightButton}</View>
     </View>
   );

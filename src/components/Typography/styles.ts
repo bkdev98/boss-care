@@ -100,4 +100,11 @@ export default StyleSheet.create({
     letterSpacing: 0.2,
     color: theme.colors.gray,
   },
+  overline: {
+    fontSize: getScalableSize.f(10),
+    lineHeight: getScalableSize.h(16),
+    fontFamily: theme.fonts.bold,
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+  },
 });

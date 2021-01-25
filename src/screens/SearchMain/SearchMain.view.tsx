@@ -9,78 +9,30 @@ import Typography from '@components/Typography';
 import IconButton from '@components/IconButton';
 
 import SearchIcon from '@components/Icon/Search';
-import VetIcon from '@components/Icon/Vet';
-import GroomingIcon from '@components/Icon/Grooming';
-import BoardingIcon from '@components/Icon/Boarding';
-import AdoptionIcon from '@components/Icon/Adoption';
-import DogWalkingIcon from '@components/Icon/DogWalking';
-import TrainingIcon from '@components/Icon/Training';
-import TaxiIcon from '@components/Icon/Taxi';
-import DateIcon from '@components/Icon/Date';
-import OtherServiceIcon from '@components/Icon/OtherService';
 
 import theme from '@theme';
 
 import styles from './styles';
 
+interface IService {
+  id: number | string;
+  title: string;
+  icon: JSX.Element;
+  action?: () => void;
+}
+
 interface SearchMainScreenProps {
   onShowAddPetModal: (content: JSX.Element) => void;
   onHideAddPetModal: () => void;
   onAddPetDetail: () => void;
+  services: IService[];
 }
-
-const SERVICES = [
-  {
-    id: 1,
-    title: 'Veterinary',
-    icon: <VetIcon />,
-  },
-  {
-    id: 2,
-    title: 'Grooming',
-    icon: <GroomingIcon />,
-  },
-  {
-    id: 3,
-    title: 'Pet boarding',
-    icon: <BoardingIcon />,
-  },
-  {
-    id: 4,
-    title: 'Adoption',
-    icon: <AdoptionIcon />,
-  },
-  {
-    id: 5,
-    title: 'Dog walking',
-    icon: <DogWalkingIcon />,
-  },
-  {
-    id: 6,
-    title: 'Training',
-    icon: <TrainingIcon />,
-  },
-  {
-    id: 7,
-    title: 'Pet taxi',
-    icon: <TaxiIcon />,
-  },
-  {
-    id: 8,
-    title: 'Pet date',
-    icon: <DateIcon />,
-  },
-  {
-    id: 9,
-    title: 'Other',
-    icon: <OtherServiceIcon />,
-  },
-];
 
 const SearchMainScreen: React.FC<SearchMainScreenProps> = ({
   onShowAddPetModal,
   onHideAddPetModal,
   onAddPetDetail,
+  services,
 }) => {
   const insets = useSafeAreaInsets();
 
@@ -122,9 +74,11 @@ const SearchMainScreen: React.FC<SearchMainScreenProps> = ({
     );
   }, []);
 
-  function renderServiceItem({item}: {item: any}) {
+  function renderServiceItem({item}: {item: IService}) {
     return (
-      <Pressable style={({pressed}) => [styles.serviceItem, pressed && styles.serviceItemPressed]}>
+      <Pressable
+        onPress={item.action}
+        style={({pressed}) => [styles.serviceItem, pressed && styles.serviceItemPressed]}>
         {item.icon}
         <Typography variant="caption" style={styles.serviceItemTitle}>
           {item.title}
@@ -145,7 +99,7 @@ const SearchMainScreen: React.FC<SearchMainScreenProps> = ({
           </IconButton>
         </View>
         <FlatList
-          data={SERVICES}
+          data={services}
           keyExtractor={(item) => item.id.toString()}
           ListHeaderComponent={() => (
             <Typography variant="h1" style={styles.greetingTxt}>

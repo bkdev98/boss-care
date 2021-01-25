@@ -23,6 +23,7 @@ interface TypographyProps extends TextProps {
     | 'paragraph'
     | 'caption'
     | 'buttonLabel'
+    | 'overline'
     | 'inputLabel';
 }
 

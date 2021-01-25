@@ -17,6 +17,7 @@ import SearchMainScreen from '@screens/SearchMain';
 import ProfileScreen from '@screens/Profile';
 import AddPetDetailScreen from '@screens/AddPetDetail';
 import MyPetsScreen from '@screens/MyPets';
+import SearchResultScreen from '@screens/SearchResult';
 
 import TabSearchIcon from '@components/Icon/TabSearch';
 import TabAppointmentsIcon from '@components/Icon/TabAppointments';
@@ -40,6 +41,7 @@ export const SCREENS = {
   PROFILE: 'Profile',
   ADD_PET_DETAIL: 'AddPetDetail',
   MY_PETS: 'MyPets',
+  SEARCH_RESULT: 'SearchResult',
 };
 
 const Tab = createBottomTabNavigator();
@@ -111,6 +113,7 @@ const AppNavigation = () => {
               initialParams={{initial: false}}
             />
             <Stack.Screen name={SCREENS.MY_PETS} component={MyPetsScreen} />
+            <Stack.Screen name={SCREENS.SEARCH_RESULT} component={SearchResultScreen} />
           </>
         )}
       </Stack.Navigator>

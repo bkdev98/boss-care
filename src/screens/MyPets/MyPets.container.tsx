@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 
 import MyPetsView from './MyPets.view';
 import {SCREENS} from '@navigation';
-import {RootState} from 'reducers';
+import {RootState} from '@reducers';
 
 interface MyPetsContainerProps {
   navigation: any;
