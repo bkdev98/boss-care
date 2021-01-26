@@ -9,16 +9,21 @@ import MapPinIcon from '@components/Icon/MapPin';
 import {ISpecialist} from '@entities/specialist';
 import getScalableSize from '@utils/getScalableSize';
 import theme from '@theme';
+import NavigationService from '@navigation/service';
+import {SCREENS} from '@navigation';
 
 interface CardProps {
   data: ISpecialist;
   style?: ViewStyle;
-  onPress?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({data, style, onPress}) => {
+const Card: React.FC<CardProps> = ({data, style}) => {
+  function handlePress() {
+    NavigationService.push(SCREENS.SERVICE_DETAIL, {data});
+  }
+
   return (
-    <TouchableOpacity activeOpacity={1} style={[styles.wrapper, style]} onPress={onPress}>
+    <TouchableOpacity activeOpacity={1} style={[styles.wrapper, style]} onPress={handlePress}>
       <View style={styles.container}>
         <Avatar uri={data.avatar} variant="smoothMedium" />
         <View style={styles.meta}>
