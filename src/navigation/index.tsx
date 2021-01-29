@@ -21,6 +21,7 @@ import SearchResultScreen from '@screens/SearchResult';
 import ServiceDetailScreen from '@screens/ServiceDetail';
 import BookResultScreen from '@screens/BookResult';
 import AppointmentsScreen from '@screens/Appointments';
+import WIPScreen from '@screens/WIP';
 
 import TabSearchIcon from '@components/Icon/TabSearch';
 import TabAppointmentsIcon from '@components/Icon/TabAppointments';
@@ -81,7 +82,7 @@ const AppTab = () => {
       }}>
       <Tab.Screen name={SCREENS.SEARCH_MAIN} component={SearchMainScreen} />
       <Tab.Screen name={SCREENS.APPOINTMENTS} component={AppointmentsScreen} />
-      <Tab.Screen name={SCREENS.EXPLORE} component={SearchMainScreen} />
+      <Tab.Screen name={SCREENS.EXPLORE} component={WIPScreen} />
       <Tab.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
     </Tab.Navigator>
   );
