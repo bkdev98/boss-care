@@ -14,19 +14,41 @@ import IconButton from '@components/IconButton';
 import Typography from '@components/Typography';
 import CalendarStrip from '@components/CalendarStrip';
 import Rating from '@components/Rating';
+import TimeStrip from '@components/TimeStrip';
 import WalletIcon from '@components/Icon/Wallet';
 import MapPinIcon from '@components/Icon/MapPin';
 import HintSuccessIcon from '@components/Icon/HintSuccess';
 import Button from 'components/Button';
+
+const TIMES = [
+  '09:00',
+  '09:30',
+  '10:00',
+  '10:30',
+  '11:00',
+  '13:00',
+  '13:30',
+  '14:00',
+  '14:30',
+  '15:00',
+  '15:30',
+  '16:00',
+];
 
 interface ServiceDetailViewProps {
   data: ISpecialist;
   detail?: any;
 }
 
+interface IBookingData {
+  date: Date | null;
+  time: string | null;
+}
+
 const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
   const insets = useSafeAreaInsets();
   const [scrollY] = useState(new Animated.Value(0));
+  const [bookingData, setBookingData] = useState<IBookingData>({date: null, time: null});
 
   const headerOverlayOpacity = scrollY.interpolate({
     inputRange: [0, getScalableSize.h(100), getScalableSize.h(420 - 70 - 44)],
@@ -119,6 +141,12 @@ const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
 
         <View style={styles.infoCard}>
           <CalendarStrip />
+          <TimeStrip
+            selected={bookingData.time}
+            onSelect={(time) => setBookingData({...bookingData, time})}
+            times={TIMES}
+            style={styles.timeStrip}
+          />
         </View>
 
         <Typography variant="h3" style={{marginBottom: getScalableSize.h(16)}}>
@@ -297,6 +325,9 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
     marginBottom: getScalableSize.h(32),
     ...theme.effects.roundIconShadow,
+  },
+  timeStrip: {
+    marginTop: getScalableSize.h(16),
   },
 });
 
