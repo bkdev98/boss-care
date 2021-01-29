@@ -49,7 +49,7 @@ const SearchResultView: React.FC<SearchResultViewProps> = ({}) => {
 
   return (
     <Layout withInsets={Platform.OS === 'android'} style={styles.wrapper}>
-      <StatusBar backgroundColor={theme.colors.background} />
+      <StatusBar translucent={false} backgroundColor={theme.colors.background} />
       <Header
         showBack
         renderTitle={renderSegmentedControl()}

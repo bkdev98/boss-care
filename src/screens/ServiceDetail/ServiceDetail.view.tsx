@@ -23,6 +23,8 @@ import ArrowRightIcon from '@components/Icon/ArrowRight';
 import WorkIcon from '@components/Icon/Work';
 import Button from '@components/Button';
 import HTMLView from '@components/HTMLView';
+import {IAppointment} from '@entities/appointment';
+import {SCREENS} from '@navigation';
 
 import NearbyList from './components/NearbyList';
 import ReviewList from './components/ReviewList';
@@ -50,7 +52,7 @@ interface ServiceDetailViewProps {
   detail?: any;
 }
 
-interface IBookingData {
+export interface IBookingData {
   date: Date | null;
   time: string | null;
 }
@@ -59,6 +61,11 @@ const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
   const insets = useSafeAreaInsets();
   const [scrollY] = useState(new Animated.Value(0));
   const [bookingData, setBookingData] = useState<IBookingData>({date: null, time: null});
+
+  function handleBook(appointment: IAppointment) {
+    setBookingData({date: null, time: null});
+    NavigationService.push(SCREENS.BOOK_RESULT, {appointment});
+  }
 
   const headerOverlayOpacity = scrollY.interpolate({
     inputRange: [0, getScalableSize.h(100), getScalableSize.h(420 - 70 - 44)],
@@ -150,7 +157,10 @@ const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
         </View>
 
         <View style={styles.infoCard}>
-          <CalendarStrip />
+          <CalendarStrip
+            selected={bookingData.date}
+            onSelect={(date) => setBookingData({...bookingData, date})}
+          />
           <TimeStrip
             selected={bookingData.time}
             onSelect={(time) => setBookingData({...bookingData, time})}
@@ -229,7 +239,13 @@ const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
         style={[styles.avatar, {transform: [{translateY: avatarTranslateY}, {scale: avatarScale}]}]}
         source={{uri: 'https://i.imgur.com/DRTfscA.png'}}
       />
-      <BookModal data={data} detail={DETAIL} />
+      <BookModal
+        data={data}
+        detail={DETAIL}
+        bookingData={bookingData}
+        setBookingData={setBookingData}
+        onBook={handleBook}
+      />
     </View>
   );
 };
@@ -273,7 +289,7 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingTop: getScalableSize.h(420 - 70),
     paddingHorizontal: getScalableSize.w(20),
-    paddingVertical: getScalableSize.h(72),
+    paddingBottom: getScalableSize.h(72 + 60),
   },
   inline: {
     flexDirection: 'row',

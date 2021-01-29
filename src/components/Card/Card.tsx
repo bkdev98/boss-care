@@ -16,15 +16,20 @@ interface CardProps {
   data: ISpecialist;
   style?: ViewStyle;
   hideExtra?: boolean;
+  disabled?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({data, style, hideExtra}) => {
+const Card: React.FC<CardProps> = ({data, style, hideExtra, disabled}) => {
   function handlePress() {
     NavigationService.push(SCREENS.SERVICE_DETAIL, {data});
   }
 
   return (
-    <TouchableOpacity activeOpacity={1} style={[styles.wrapper, style]} onPress={handlePress}>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={[styles.wrapper, style]}
+      onPress={handlePress}
+      disabled={disabled}>
       <View style={styles.container}>
         <Avatar uri={data.avatar} variant="smoothMedium" />
         <View style={styles.meta}>

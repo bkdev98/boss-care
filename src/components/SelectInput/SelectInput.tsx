@@ -27,7 +27,7 @@ export interface SelectInputProps {
   style?: ViewStyle;
   setFieldValue?: any;
   isFocused?: boolean;
-  value?: string | Date;
+  value?: any;
   placeholder?: string;
   options?: ISelectOption[] | 'dates';
   onSelect?: any;

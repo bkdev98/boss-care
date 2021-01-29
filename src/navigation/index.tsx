@@ -19,6 +19,7 @@ import AddPetDetailScreen from '@screens/AddPetDetail';
 import MyPetsScreen from '@screens/MyPets';
 import SearchResultScreen from '@screens/SearchResult';
 import ServiceDetailScreen from '@screens/ServiceDetail';
+import BookResultScreen from '@screens/BookResult';
 
 import TabSearchIcon from '@components/Icon/TabSearch';
 import TabAppointmentsIcon from '@components/Icon/TabAppointments';
@@ -44,6 +45,7 @@ export const SCREENS = {
   MY_PETS: 'MyPets',
   SEARCH_RESULT: 'SearchResult',
   SERVICE_DETAIL: 'ServiceDetail',
+  BOOK_RESULT: 'BookResult',
 };
 
 const Tab = createBottomTabNavigator();
@@ -120,6 +122,11 @@ const AppNavigation = () => {
               name={SCREENS.SERVICE_DETAIL}
               component={ServiceDetailScreen}
               initialParams={{data: null}}
+            />
+            <Stack.Screen
+              name={SCREENS.BOOK_RESULT}
+              component={BookResultScreen}
+              initialParams={{appointment: null}}
             />
           </>
         )}

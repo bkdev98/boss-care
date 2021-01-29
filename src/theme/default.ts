@@ -49,6 +49,13 @@ export default {
       shadowRadius: 28,
       elevation: 5,
     },
+    downPlahaShadow: {
+      shadowColor: 'rgba(46, 30, 122)',
+      shadowOpacity: 0.08,
+      shadowOffset: {width: 8, height: 6},
+      shadowRadius: 32,
+      elevation: 5,
+    },
     blueShadow: {
       shadowColor: 'rgba(46, 30, 122, 0.2)',
       shadowOpacity: 1,

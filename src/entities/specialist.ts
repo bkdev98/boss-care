@@ -12,6 +12,11 @@ export interface IReview {
   createdAt: Date;
 }
 
+export interface IAddress {
+  name?: string;
+  location?: string;
+}
+
 export interface ISpecialist {
   id: string;
   name: string;
@@ -22,4 +27,5 @@ export interface ISpecialist {
   experienceYears: number;
   startPrice: number;
   meterFromHere?: number;
+  address?: IAddress;
 }

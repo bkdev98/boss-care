@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {Modalize, ModalizeProps} from 'react-native-modalize';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import moment from 'moment';
 
 import Typography from '@components/Typography';
 import IconButton from '@components/IconButton';
@@ -14,21 +15,54 @@ import CloseIcon from '@components/Icon/Close';
 import getScalableSize from '@utils/getScalableSize';
 import theme from '@theme';
 import {ISpecialist} from '@entities/specialist';
+import {IAppointment} from '@entities/appointment';
 
-import {TIMES} from '../ServiceDetail.view';
+import {TIMES, IBookingData} from '../ServiceDetail.view';
 
 interface BookModalProps extends ModalizeProps {
   detail: any;
   data: ISpecialist;
+  bookingData: IBookingData;
+  setBookingData?: (data: IBookingData) => void;
+  onBook?: (appointment: IAppointment) => void;
 }
 
-const BookModal: React.FC<BookModalProps> = ({onClose, detail, data}) => {
+const BookModal: React.FC<BookModalProps> = ({
+  detail,
+  data,
+  bookingData,
+  setBookingData,
+  onBook,
+}) => {
   const modalize = useRef<Modalize>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const insets = useSafeAreaInsets();
 
   function handleClose() {
-    onClose?.();
+    setIsExpanded(false);
+    modalize?.current?.close?.('alwaysOpen');
+  }
+
+  function handleBook() {
+    if (!isExpanded) {
+      modalize?.current?.open?.('top');
+      setIsExpanded(true);
+    } else {
+      if (!bookingData.time || !bookingData.date) {
+        return;
+      }
+      onBook?.({
+        specialist: {
+          ...data,
+          address: detail?.address,
+        },
+        date: moment(bookingData.date)
+          .hour(parseInt(bookingData.time.split(':')[0], 10))
+          .minute(parseInt(bookingData.time.split(':')[1], 10))
+          .toDate(),
+      });
+      setIsExpanded(false);
+    }
   }
 
   return (
@@ -38,8 +72,8 @@ const BookModal: React.FC<BookModalProps> = ({onClose, detail, data}) => {
       snapPoint={getScalableSize.h(108)}
       onPositionChange={(position) => setIsExpanded(position === 'top')}
       withHandle={false}
-      modalTopOffset={Dimensions.get('window').height - (insets.bottom + getScalableSize.h(430))}
-      onClose={handleClose}>
+      modalStyle={theme.effects.downPlahaShadow}
+      modalTopOffset={Dimensions.get('window').height - (insets.bottom + getScalableSize.h(430))}>
       {isExpanded && (
         <>
           <View style={styles.header}>
@@ -50,9 +84,19 @@ const BookModal: React.FC<BookModalProps> = ({onClose, detail, data}) => {
               Booking confirmation
             </Typography>
           </View>
-          <Card style={styles.card} data={data} hideExtra />
-          <SelectInput wrapperStyle={styles.dateSelect} label="Date" options="dates" />
-          <TimeStrip times={TIMES} />
+          <Card style={styles.card} data={data} hideExtra disabled />
+          <SelectInput
+            setFieldValue={(date: Date) => bookingData && setBookingData?.({...bookingData, date})}
+            wrapperStyle={styles.dateSelect}
+            label="Date"
+            options="dates"
+            value={bookingData.date}
+          />
+          <TimeStrip
+            selected={bookingData?.time}
+            onSelect={(time) => bookingData && setBookingData?.({...bookingData, time})}
+            times={TIMES}
+          />
         </>
       )}
       <View style={[styles.wrapper, {paddingBottom: insets.bottom}]}>
@@ -73,7 +117,13 @@ const BookModal: React.FC<BookModalProps> = ({onClose, detail, data}) => {
               </View>
             )}
           </View>
-          <Button label="Book" variant="primary" style={styles.bookBtn} />
+          <Button
+            label="Book"
+            variant="primary"
+            style={styles.bookBtn}
+            disabled={isExpanded && (!bookingData.date || !bookingData.time)}
+            onPress={handleBook}
+          />
         </View>
       </View>
     </Modalize>

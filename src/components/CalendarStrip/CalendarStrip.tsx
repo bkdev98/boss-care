@@ -8,11 +8,18 @@ import textStyles from '@components/Typography/styles';
 import getScalableSize from '@utils/getScalableSize';
 import CalendarIcon from '@components/Icon/Calendar';
 
-const CalendarStrip = () => {
+interface CalendarStripProps {
+  selected?: Date | null;
+  onSelect?: (date: Date) => void;
+}
+
+const CalendarStrip: React.FC<CalendarStripProps> = ({selected, onSelect}) => {
   return (
     <RNCalendarStrip
       style={styles.wrapper}
       scrollable
+      selectedDate={selected ? moment(selected) : undefined}
+      onDateSelected={(date) => onSelect?.(date.toDate())}
       iconStyle={styles.navIcon}
       calendarHeaderStyle={styles.headerStyle}
       calendarHeaderContainerStyle={styles.headerContainer}
