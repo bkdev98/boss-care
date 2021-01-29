@@ -18,7 +18,16 @@ import TimeStrip from '@components/TimeStrip';
 import WalletIcon from '@components/Icon/Wallet';
 import MapPinIcon from '@components/Icon/MapPin';
 import HintSuccessIcon from '@components/Icon/HintSuccess';
-import Button from 'components/Button';
+import WriteReviewIcon from '@components/Icon/WriteReview';
+import ArrowRightIcon from '@components/Icon/ArrowRight';
+import WorkIcon from '@components/Icon/Work';
+import Button from '@components/Button';
+import HTMLView from '@components/HTMLView';
+
+import NearbyList from './components/NearbyList';
+import ReviewList from './components/ReviewList';
+import {SPECIALISTS} from '../SearchResult/dump';
+import {DETAIL} from './dump';
 
 const TIMES = [
   '09:00',
@@ -149,30 +158,50 @@ const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
           />
         </View>
 
+        <View
+          style={[
+            styles.infoCard,
+            {paddingVertical: getScalableSize.h(5), paddingHorizontal: getScalableSize.w(5)},
+          ]}>
+          <View style={styles.addressHeader}>
+            <View style={styles.workIconWrapper}>
+              <WorkIcon />
+            </View>
+            <View>
+              <Typography variant="h5">{DETAIL.address.name}</Typography>
+              <Typography variant="body3">{DETAIL.address.location}</Typography>
+            </View>
+          </View>
+          <View style={styles.mapWrapper} />
+        </View>
+
         <Typography variant="h3" style={{marginBottom: getScalableSize.h(16)}}>
           Biography
         </Typography>
-        <Typography variant="body3" style={{marginBottom: getScalableSize.h(24)}}>
-          Alekseenko Vasily Vasilyevich, born in 1974 Master of Veterinary Medicine Leading doctor
-          Veterinary clinic "Alden-Vet" Specialization: clinical diagnostics, surgery vet, dentist
+        <HTMLView htmlContent={DETAIL.biography} />
+
+        <View style={[styles.row, {marginBottom: getScalableSize.h(16)}]}>
+          <Typography variant="h3">Reviews</Typography>
+          <Button
+            label={`View all ${data.totalReview} reviews`}
+            size="small"
+            variant="ghost"
+            rightIcon={<ArrowRightIcon />}
+          />
+        </View>
+        <ReviewList data={DETAIL.reviews} style={styles.reviewList} />
+
+        <Button
+          label="Write a Review"
+          variant="ghost"
+          style={styles.writeReviewBtn}
+          leftIcon={<WriteReviewIcon />}
+        />
+
+        <Typography variant="h3" style={{marginBottom: getScalableSize.h(16)}}>
+          Nearby vet
         </Typography>
-        <Typography variant="h4" style={{marginBottom: getScalableSize.h(16)}}>
-          Education
-        </Typography>
-        <Typography variant="body3" style={{marginBottom: getScalableSize.h(24)}}>
-          Before entering the agricultural Academy he worked at the department of surgery of the
-          veterinary faculty (1991-1992). He graduated from the Faculty of Veterinary Medicine of
-          NAU in 1997. He defended his thesis at the Department of Surgery on the topic: "Surgery on
-          the urinary organs of cats." Scientific advisor prof. Borisevich V.B. In 1998 graduated
-          from the Magistracy.
-        </Typography>
-        <Typography variant="h4" style={{marginBottom: getScalableSize.h(16)}}>
-          Personal information
-        </Typography>
-        <Typography variant="body3" style={{marginBottom: getScalableSize.h(24)}}>
-          Candidate master of sports in equestrian sport (dressage). Favorite breed of dog is German
-          Shepherd. He is married, has two children: daughter Alika and son Timur.
-        </Typography>
+        <NearbyList data={SPECIALISTS} style={styles.nearbyList} />
       </Animated.ScrollView>
       <View
         style={[
@@ -328,6 +357,40 @@ const styles = StyleSheet.create({
   },
   timeStrip: {
     marginTop: getScalableSize.h(16),
+  },
+  nearbyList: {
+    marginHorizontal: -getScalableSize.w(20),
+  },
+  reviewList: {
+    marginHorizontal: -getScalableSize.w(20),
+    marginBottom: getScalableSize.h(24),
+  },
+  writeReviewBtn: {
+    backgroundColor: theme.colors.lightGray2,
+    borderRadius: getScalableSize.w(9),
+    marginBottom: getScalableSize.h(34),
+  },
+  addressHeader: {
+    height: getScalableSize.h(59),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  workIconWrapper: {
+    backgroundColor: theme.colors.lightGray2,
+    width: getScalableSize.w(36),
+    height: getScalableSize.w(36),
+    borderRadius: getScalableSize.w(36 / 2),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: getScalableSize.w(11),
+    marginRight: getScalableSize.w(16),
+  },
+  mapWrapper: {
+    backgroundColor: theme.colors.lightGray2,
+    flex: 1,
+    flexGrow: 1,
+    borderBottomLeftRadius: getScalableSize.w(10),
+    borderBottomRightRadius: getScalableSize.w(10),
   },
 });
 

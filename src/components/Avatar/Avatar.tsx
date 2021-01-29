@@ -11,7 +11,7 @@ interface AvatarProps {
   variant?: 'circleFull' | 'smoothFull' | 'smoothMedium' | 'smoothSmall';
   wrapperStyle?: ViewStyle;
   style?: ImageStyle;
-  uri?: string;
+  uri?: any;
   boss?: boolean;
   extra?: JSX.Element;
 }

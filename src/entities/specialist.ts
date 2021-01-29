@@ -1,7 +1,7 @@
 export interface IReviewUser {
   id: string;
   name: string;
-  avatar?: number;
+  avatar?: string;
 }
 
 export interface IReview {
@@ -9,6 +9,7 @@ export interface IReview {
   user: IReviewUser;
   rating: number;
   comment?: string;
+  createdAt: Date;
 }
 
 export interface ISpecialist {
