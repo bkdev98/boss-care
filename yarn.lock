@@ -5987,9 +5987,9 @@ react-lifecycles-compat@^3.0.2:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-"react-native-calendar-strip@https://github.com/BugiDev/react-native-calendar-strip":
-  version "2.1.5"
-  resolved "https://github.com/BugiDev/react-native-calendar-strip#49ecc6f5039b40eb39fa243f4b850d7a330c3391"
+"react-native-calendar-strip@https://github.com/bkdev98/react-native-calendar-strip":
+  version "2.1.6"
+  resolved "https://github.com/bkdev98/react-native-calendar-strip#3e5031cfe0b9de4980be3ea8d6407e1b927f36c7"
   dependencies:
     moment ">=2.0.0"
     node-git-hooks "^1.0.1"
