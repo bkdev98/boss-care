@@ -17,6 +17,9 @@ export const DETAIL = {
     <h4>Personal information</h4>
     <p>Candidate master of sports in equestrian sport (dressage). Favorite breed of dog is German Shepherd. He is married, has two children: daughter Alika and son Timur.</p>
   `,
+  firstVisitPrice: 20,
+  rating: 4.9,
+  totalReview: 125,
   reviews: [
     {
       id: '1',

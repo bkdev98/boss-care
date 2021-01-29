@@ -15,9 +15,10 @@ import {SCREENS} from '@navigation';
 interface CardProps {
   data: ISpecialist;
   style?: ViewStyle;
+  hideExtra?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({data, style}) => {
+const Card: React.FC<CardProps> = ({data, style, hideExtra}) => {
   function handlePress() {
     NavigationService.push(SCREENS.SERVICE_DETAIL, {data});
   }
@@ -34,30 +35,32 @@ const Card: React.FC<CardProps> = ({data, style}) => {
           </View>
         </View>
       </View>
-      <View style={styles.extra}>
-        <Typography variant="h5" style={styles.caption}>
-          {data.experienceYears}
-        </Typography>
-        <Typography variant="caption" style={styles.caption}>
-          {' years of experience'}
-        </Typography>
-        <View style={styles.extraItem}>
-          <View style={styles.extraIcon}>
-            <MapPinIcon color={theme.colors.black} width={18} height={18} />
-          </View>
-          <Typography variant="caption" style={styles.extraTxt}>
-            {data.meterFromHere} km
+      {!hideExtra && (
+        <View style={styles.extra}>
+          <Typography variant="h5" style={styles.caption}>
+            {data.experienceYears}
           </Typography>
-        </View>
-        <View style={styles.extraItem}>
-          <View style={styles.extraIcon}>
-            <WalletIcon />
-          </View>
-          <Typography variant="caption" style={styles.extraTxt}>
-            ${data.startPrice}
+          <Typography variant="caption" style={styles.caption}>
+            {' years of experience'}
           </Typography>
+          <View style={styles.extraItem}>
+            <View style={styles.extraIcon}>
+              <MapPinIcon color={theme.colors.black} width={18} height={18} />
+            </View>
+            <Typography variant="caption" style={styles.extraTxt}>
+              {data.meterFromHere} km
+            </Typography>
+          </View>
+          <View style={styles.extraItem}>
+            <View style={styles.extraIcon}>
+              <WalletIcon />
+            </View>
+            <Typography variant="caption" style={styles.extraTxt}>
+              ${data.startPrice}
+            </Typography>
+          </View>
         </View>
-      </View>
+      )}
     </TouchableOpacity>
   );
 };

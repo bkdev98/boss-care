@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, View, StyleSheet, StatusBar, Animated} from 'react-native';
+import {View, StyleSheet, StatusBar, Animated} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -26,10 +26,11 @@ import HTMLView from '@components/HTMLView';
 
 import NearbyList from './components/NearbyList';
 import ReviewList from './components/ReviewList';
+import BookModal from './components/BookModal';
 import {SPECIALISTS} from '../SearchResult/dump';
 import {DETAIL} from './dump';
 
-const TIMES = [
+export const TIMES = [
   '09:00',
   '09:30',
   '10:00',
@@ -228,6 +229,7 @@ const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
         style={[styles.avatar, {transform: [{translateY: avatarTranslateY}, {scale: avatarScale}]}]}
         source={{uri: 'https://i.imgur.com/DRTfscA.png'}}
       />
+      <BookModal data={data} detail={DETAIL} />
     </View>
   );
 };
