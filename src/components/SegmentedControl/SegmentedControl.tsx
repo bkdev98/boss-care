@@ -51,7 +51,13 @@ const SegmentedControl: React.FC<SegmentedControlProps> = ({
   });
 
   return (
-    <View style={[styles.wrapper, {height, borderRadius}, style]}>
+    <View
+      style={[
+        styles.wrapper,
+        {height, borderRadius},
+        size === 'large' && styles.borderLarge,
+        style,
+      ]}>
       {indicatorWidth && (
         <Animated.View
           style={[
@@ -75,6 +81,7 @@ const SegmentedControl: React.FC<SegmentedControlProps> = ({
             variant="h4"
             style={[
               styles.label,
+              size === 'large' && styles.labelLarge,
               {
                 color: index === selectedIndex ? theme.colors.text_contrast : theme.colors.black,
               },
@@ -94,6 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     overflow: 'visible',
   },
+  borderLarge: {borderColor: '#E4E3F3'},
   segment: {
     flex: 1,
     flexGrow: 1,
@@ -110,6 +118,9 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: theme.fonts.semiBold,
     fontSize: getScalableSize.f(14),
+  },
+  labelLarge: {
+    fontSize: getScalableSize.f(16),
   },
 });
 

@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import {View, StyleSheet, StatusBar, Animated} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import {useDispatch} from 'react-redux';
 
+import {bookAppointment} from '@actions';
 import theme from '@theme';
 import NavigationService from '@navigation/service';
 import {ISpecialist} from '@entities/specialist';
@@ -59,10 +61,12 @@ export interface IBookingData {
 
 const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
   const insets = useSafeAreaInsets();
+  const dispatch = useDispatch();
   const [scrollY] = useState(new Animated.Value(0));
   const [bookingData, setBookingData] = useState<IBookingData>({date: null, time: null});
 
   function handleBook(appointment: IAppointment) {
+    dispatch(bookAppointment(appointment));
     setBookingData({date: null, time: null});
     NavigationService.push(SCREENS.BOOK_RESULT, {appointment});
   }
@@ -178,7 +182,7 @@ const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({data}) => {
             <View style={styles.workIconWrapper}>
               <WorkIcon />
             </View>
-            <View>
+            <View style={styles.grow}>
               <Typography variant="h5">{DETAIL.address.name}</Typography>
               <Typography variant="body3">{DETAIL.address.location}</Typography>
             </View>
@@ -410,6 +414,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: getScalableSize.w(10),
     borderBottomRightRadius: getScalableSize.w(10),
   },
+  grow: {flex: 1, flexGrow: 1},
 });
 
 export default ServiceDetailView;

@@ -52,6 +52,7 @@ const BookModal: React.FC<BookModalProps> = ({
         return;
       }
       onBook?.({
+        id: Date.now().toString(),
         specialist: {
           ...data,
           address: detail?.address,
